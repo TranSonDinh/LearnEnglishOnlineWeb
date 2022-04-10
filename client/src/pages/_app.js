@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { CacheProvider } from "@emotion/react";
 import { Provider } from "react-redux";
-import store from "../redux";
+import store from "redux";
 import theme, { createEmotionCache } from "public/material";
 import "public/styles/index.scss";
 import "../languages";
