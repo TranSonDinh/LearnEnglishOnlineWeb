@@ -1,0 +1,75 @@
+html {
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: "Source Sans Pro", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #ffff;
+  font-size: 16px;
+  background-color: #1d2c3f;
+  width: "100%";
+
+  & > *:first-child {
+    height: 100vh;
+    overflow: hidden;
+
+    @media screen and (max-width: 600px) {
+      height: calc(var(--vh, 1vh) * 100);
+    }
+  }
+}
+
+a {
+  cursor: pointer;
+}
+
+/* width */
+::-webkit-scrollbar {
+  display: none;
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; // Default 1 line
+  -webkit-box-orient: vertical;
+}
+
+.center-root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.space-between-root {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.no-style-link {
+  &,
+  &:hover {
+    text-decoration: none !important;
+  }
+}
+
+.scrollbar {
+  &::-webkit-scrollbar {
+    width: 5px;
+    display: flex;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 32px;
+  }
+}
