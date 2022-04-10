@@ -1,6 +1,6 @@
 import React from "react";
 import { Stack } from "@mui/material";
-import AppTypography from "components";
+import { AppTypography } from "components/common";
 
 const Home = () => {
   return (
