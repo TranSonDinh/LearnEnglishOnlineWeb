@@ -8,7 +8,7 @@ export const ARR_LANGUAGE = [
 ];
 
 // List language code
-export const DEFAULT_LANG = TXT_KEY_EN;
+export const DEFAULT_LANG = TXT_KEY_VI;
 
 // Namespace Key
 export const NS_COMMON = "common";

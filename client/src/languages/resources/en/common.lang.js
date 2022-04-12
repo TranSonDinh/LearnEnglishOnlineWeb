@@ -1,1 +1,20 @@
-export default {};
+export default {
+  TXT_SIGN_IN: "Sign in",
+  TXT_SIGN_UP: "Sign up",
+  TXT_REMEMBER_ME: "Remember me",
+  TXT_FORGET: "Forget?",
+  TXT_FORGOT_PASSWORD: "Forgot password",
+  TXT_SEND: "Send",
+
+  //Placeholder
+  P_USERNAME_EMAIL: "Enter email or username",
+  P_PASSWORD: "Enter password",
+  P_USERNAME: "Enter username",
+  P_EMAIL: "Enter email",
+
+  //Message
+  MSG_TERM_SIGN_IN:
+    "Khi đăng ký trên EFV, bạn đã đồng ý với <bold>Các chính sách</bold> và <bold>Chính sách bảo mật</bold> của chúng tôi.",
+  MSG_FORGOT_PASSWORD:
+    "Chúng tôi sẽ gửi hướng dẫn đặt lại mật khẩu của bạn qua email.",
+};

@@ -1,3 +1,4 @@
 import AppTypography from "./AppTypography";
+import AppButton from "./AppButton";
 
-export { AppTypography };
+export { AppTypography, AppButton };

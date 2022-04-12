@@ -1,5 +1,5 @@
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/styles";
+import { useTheme } from "@mui/material/styles";
 
 const useResponsive = (range = "between", from = "md", to = "lg") => {
   const theme = useTheme();

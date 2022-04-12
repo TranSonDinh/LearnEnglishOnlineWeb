@@ -70,14 +70,15 @@ export default {
     A600: "#2D3B4D",
   },
   text: {
-    primary: white,
+    primary: "#4B4B4B",
     secondary: "#77808C",
     link: "#2C8CFF",
     disabled: "rgba(255, 255, 255, 0.7)",
   },
   background: {
-    default: "#1D2C3F",
-    paper: "linear-gradient(180deg, rgba(255, 255, 255, 0.0698) 85.21%, rgba(255, 255, 255, 0.093) 100%)",
+    default: "#FFFFFF",
+    paper:
+      "linear-gradient(180deg, rgba(255, 255, 255, 0.0698) 85.21%, rgba(255, 255, 255, 0.093) 100%)",
     dark: "#06080A",
   },
   pink: {
