@@ -1,8 +1,12 @@
 import React, { memo, forwardRef } from "react";
-import { NoSsr } from "@mui/material";
+import { Box, NoSsr } from "@mui/material";
 
 const MainLayout = forwardRef(({ children }, ref) => {
-  return <NoSsr>{children}</NoSsr>;
+  return (
+    <Box sx={{ height: "100%", overflowY: "auto" }}>
+      <NoSsr>{children}</NoSsr>
+    </Box>
+  );
 });
 
 MainLayout.propTypes = {};

@@ -90,19 +90,19 @@ const useStyles = makeStyles((theme) => ({
     margin: "0 auto",
   },
   input: {
-    background: "#f7f7f7",
-    marginTop: 8,
-    borderRadius: 16,
+    background: theme.palette.grey.main,
+    marginTop: theme.spacing(1),
+    borderRadius: theme.spacing(2),
     "& .MuiOutlinedInput-root": {
       "& fieldset": {
-        border: "2px solid #e5e5e5",
-        borderRadius: 16,
+        border: `2px solid ${theme.palette.grey[100]}`,
+        borderRadius: theme.spacing(2),
       },
       "&:hover fieldset": {
-        border: "2px solid #c2bebe",
+        border: `2px solid ${theme.palette.grey[200]}`,
       },
       "&.Mui-focused fieldset": {
-        border: "2px solid #c2bebe",
+        border: `2px solid ${theme.palette.grey[200]}`,
       },
     },
   },
@@ -111,16 +111,16 @@ const useStyles = makeStyles((theme) => ({
   },
   checkbox: {
     alignSelf: "self-start",
-    margin: "8px 0",
+    margin: theme.spacing(1, 0),
   },
   btnRedirect: {
     position: "absolute",
-    right: 24,
-    top: 24,
+    right: theme.spacing(3),
+    top: theme.spacing(3),
   },
   forgotPassword: {
     fontWeight: 700,
-    color: "#afafaf",
+    color: theme.palette.grey[300],
     textTransform: "uppercase",
     letterSpacing: 0.8,
     fontSize: 15,

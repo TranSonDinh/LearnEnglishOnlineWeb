@@ -12,6 +12,7 @@ export const DEFAULT_LANG = TXT_KEY_VI;
 
 // Namespace Key
 export const NS_COMMON = "common";
+export const NS_HOME = "home";
 
 // Format
 // export const FORMAT_??? = "???";

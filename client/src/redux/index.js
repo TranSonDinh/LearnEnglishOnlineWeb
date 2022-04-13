@@ -1,5 +1,4 @@
 import { createStore, applyMiddleware, combineReducers } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
 import createSagaMiddleware from "redux-saga";
 import rootSaga from "sagas";
 import * as AccountRedux from "./account.redux";
@@ -19,13 +18,7 @@ export const rootReducer = (state, action) => {
 const sagaMiddleware = createSagaMiddleware();
 
 // Create store
-const store =
-  process.env.NODE_ENV === "production"
-    ? createStore(rootReducer, applyMiddleware(sagaMiddleware))
-    : createStore(
-        rootReducer,
-        composeWithDevTools(applyMiddleware(sagaMiddleware))
-      );
+const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 
 // kick off root saga
 sagaMiddleware.run(rootSaga);

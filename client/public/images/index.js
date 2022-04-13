@@ -1,5 +1,7 @@
 // Special
-export const Favicon = "/images/favicon.ico";
+export const Favicon = "public/images/favicon.ico";
 
 // Image
 // export const XXXImage = "/images/img-XXX.png";
+
+export const LapTopFeature = "public/images/laptop-feature.svg";

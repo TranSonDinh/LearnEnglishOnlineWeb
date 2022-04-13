@@ -56,27 +56,6 @@ AppButton.defaultProps = {
   disabled: false,
 };
 
-const getMainColor = (color) => {
-  switch (color) {
-    case "primary":
-      return palette.primary;
-    case "error":
-      return palette.error;
-    case "secondary":
-      return palette.secondary;
-    case "warning":
-      return palette.warning;
-    case "grey":
-      return palette.grey;
-    case "success":
-      return palette.success;
-    case "attention":
-      return palette.attention;
-    default:
-      return palette.attention;
-  }
-};
-
 export default memo(AppButton);
 
 const useStyles = makeStyles((theme) => ({
