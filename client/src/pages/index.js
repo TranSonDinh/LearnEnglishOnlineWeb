@@ -1,15 +1,23 @@
 import React from "react";
-import { Stack } from "@mui/material";
+import { Divider, Stack } from "@mui/material";
 import { AppTypography } from "components/common";
 import HomeLayout from "layouts/HomeLayout";
-import { AppSlideshow, WhyChooseBlock } from "components";
+import { AppSlideshow, LearnWith, Skill, WhyChooseBlock } from "components";
 
 const Home = () => {
   return (
     <HomeLayout>
       <AppSlideshow slideImages={slideImages} />
-      <Stack height={500}>
+      <Stack>
         <WhyChooseBlock />
+        <Divider
+          sx={{ borderColor: "grey.100", borderBottomWidth: 2, mx: 2 }}
+        />
+        <LearnWith />
+        <Divider
+          sx={{ borderColor: "grey.100", borderBottomWidth: 2, mx: 2 }}
+        />
+        <Skill />
       </Stack>
     </HomeLayout>
   );

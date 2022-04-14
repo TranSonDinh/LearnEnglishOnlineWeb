@@ -30,7 +30,7 @@ export default {
     contrastText: black,
     dark: "#4fb603",
     main: "#58cc02",
-    light: "",
+    light: "#e1ffcb",
   },
   attention: {
     contrastText: white,
@@ -78,8 +78,7 @@ export default {
   },
   background: {
     default: "#FFFFFF",
-    paper:
-      "linear-gradient(180deg, rgba(255, 255, 255, 0.0698) 85.21%, rgba(255, 255, 255, 0.093) 100%)",
+    paper: "#23085A",
     dark: "#235390",
   },
   pink: {

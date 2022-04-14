@@ -72,7 +72,11 @@ const useStyles = makeStyles((theme) => ({
       boxShadow: "0 5px 0 #1899d6",
     },
   },
-  disabled: {},
+  disabled: {
+    backgroundColor: `${theme.palette.grey[100]}!important`,
+    color: "#939393!important",
+    boxShadow: "0 5px 0 #cfcfcf!important",
+  },
   outlined: {},
   outlinedSizeSmall: {},
 }));
