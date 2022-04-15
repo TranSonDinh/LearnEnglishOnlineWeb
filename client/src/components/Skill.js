@@ -13,8 +13,10 @@ const Skill = () => {
   const classes = useStyles();
 
   return (
-    <Stack alignItems="center" sx={{ my: 8 }} spacing={4}>
-      <AppTypography variant="h3">{getLabel("TXT_SKILL_TITLE")}</AppTypography>
+    <Stack alignItems="center" sx={{ my: 8 }} spacing={8}>
+      <AppTypography variant="h1" fontWeight={700}>
+        {getLabel("TXT_SKILL_TITLE")}
+      </AppTypography>
       <Stack direction="row" spacing={4}>
         <Box className={classes.item} sx={{ color: "#00a4ff" }}>
           <HeadphonesIcon fontSize="large" sx={{ color: "#00a4ff" }} />

@@ -5,6 +5,14 @@ export default {
   TXT_FORGET: "Forget?",
   TXT_FORGOT_PASSWORD: "Forgot password",
   TXT_SEND: "Send",
+  TXT_ALL: "Tất cả",
+  TXT_LEARNED: "Đã học",
+  TXT_SAVED: "Đã lưu",
+  TXT_FINISHED: "Đã thi",
+  TXT_PRACTICE_READING: "Luyện đọc",
+  TXT_PRACTICE_LISTENING: "Luyện nghe",
+  TXT_LEARNING_VOCABULARY: "Học từ vựng",
+  TXT_MOCK_TOEIC_TEST: "Thi thử TOEIC",
 
   //Placeholder
   P_USERNAME_EMAIL: "Enter email or username",
