@@ -54,30 +54,22 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: theme.spacing(3),
     background: "transparent",
     color: theme.palette.grey[400],
-
     padding: theme.spacing(1.25, 6),
     flexGrow: 1,
     "&:hover": {
       background: "transparent",
     },
-    minWidth: 172,
-    [theme.breakpoints.down("lg")]: {
-      minWidth: 162,
-    },
+    minWidth: "50%",
     [theme.breakpoints.down("sm")]: {
-      minWidth: 114,
       padding: theme.spacing(1.125, 1),
       color: theme.palette.grey[400],
-      "&:nth-child(2)": {
-        minWidth: 100,
-      },
     },
   },
   selected: {
     color: theme.palette.common.white,
     background: theme.palette.grey[400],
     "&:hover": {
-      background: theme.palette.grey[400],
+      background: "#0c8dcb",
     },
   },
 }));
