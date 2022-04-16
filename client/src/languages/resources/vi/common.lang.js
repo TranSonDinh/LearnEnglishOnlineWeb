@@ -13,6 +13,8 @@ export default {
   TXT_PRACTICE_LISTENING: "Luyện nghe",
   TXT_LEARNING_VOCABULARY: "Học từ vựng",
   TXT_MOCK_TOEIC_TEST: "Thi thử TOEIC",
+  TXT_START: "Bắt đầu",
+  TXT_REDO: "Làm lại",
 
   //Placeholder
   P_USERNAME_EMAIL: "Email hoặc tên đăng nhập",
