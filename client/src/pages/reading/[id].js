@@ -22,7 +22,7 @@ const ReadingDetail = () => {
         spacing={3}
       >
         <AppTypography variant="subtitle1" mt={3}>
-          {getLabel("TXT_LISTENING_QUESTION_TITLE")}
+          {getLabel("TXT_READING_QUESTION_TITLE")}
         </AppTypography>
         <ReadingContainer>
           Hai bác sĩ khám sàng lọc cho từng học sinh. Họ đo thân nhiệt, nhịp

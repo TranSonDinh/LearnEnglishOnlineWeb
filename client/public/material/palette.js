@@ -47,7 +47,7 @@ export default {
   },
   error: {
     contrastText: white,
-    dark: "#A93131",
+    dark: "#c93838",
     main: "#FF4B4B",
     light: "#FF9F9F",
   },

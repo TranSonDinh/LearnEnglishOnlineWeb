@@ -5,7 +5,13 @@ import { AppTypography } from "./common";
 import { useTranslation } from "react-i18next";
 import { Trans } from "components";
 
-const AppQuestion = ({ data, ...otherProps }) => {
+const AppQuestion = ({
+  data,
+  value,
+  onChange,
+  questionContent,
+  ...otherProps
+}) => {
   const { t: getLabel } = useTranslation();
 
   return (
@@ -18,12 +24,16 @@ const AppQuestion = ({ data, ...otherProps }) => {
           })}
         />
       </AppTypography>
-      <RadioGroup
-        aria-labelledby="demo-radio-buttons-group-label"
-        defaultValue={data?.choose?.[0].value}
-      >
-        {data?.choose?.map(({ value, label }) => (
-          <FormControlLabel value={value} label={label} control={<Radio />} />
+      {Boolean(questionContent) && questionContent}
+      <RadioGroup value={value} onChange={() => onChange(data?.numberQuestion)}>
+        {data?.choose?.map(({ value, label }, index) => (
+          <FormControlLabel
+            value={value}
+            key={index}
+            label={label}
+            control={<Radio />}
+            sx={{ width: "fit-content" }}
+          />
         ))}
       </RadioGroup>
     </Stack>
@@ -37,6 +47,9 @@ AppQuestion.propTypes = {
     message: PropTypes.string,
     numberQuestion: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   }),
+  questionContent: PropTypes.node,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  onChange: PropTypes.func,
 };
 
 AppQuestion.defaultProps = {

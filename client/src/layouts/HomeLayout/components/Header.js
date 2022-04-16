@@ -5,6 +5,7 @@ import makeStyles from "@mui/styles/makeStyles";
 import clsx from "clsx";
 import { AppButton, AppTypography } from "components/common";
 import { useTranslation } from "react-i18next";
+import HeaderTabs from "./HeaderTabs";
 
 const Header = ({ className, ...otherProps }) => {
   const classes = useStyles();
@@ -24,6 +25,7 @@ const Header = ({ className, ...otherProps }) => {
         className={classes.stackCenter}
       >
         <AppTypography variant="h2">EFV</AppTypography>
+        <HeaderTabs />
         <Stack direction="row" spacing={1.5}>
           <AppButton classes={{ contained: classes.btnSignIn }}>
             {getLabel("TXT_SIGN_IN")}
@@ -51,7 +53,6 @@ export const HEADER_ID = "HEADER_ID";
 const useStyles = makeStyles((theme) => ({
   root: {
     height: 70,
-    borderBottom: "2px solid rgba(255, 255, 255, 0.0837)",
     backgroundColor: theme.palette.background.dark,
     color: theme.palette.common.white,
   },

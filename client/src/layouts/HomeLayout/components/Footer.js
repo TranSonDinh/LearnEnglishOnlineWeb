@@ -2,6 +2,7 @@ import React, { memo } from "react";
 import { Box, Button, Stack } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { AppTypography } from "components/common";
+import { PathConstant } from "const";
 
 const Footer = () => {
   const classes = useStyles();
@@ -9,9 +10,8 @@ const Footer = () => {
     <Box
       sx={{
         background: ({ palette }) => palette.background.dark,
-        pt: 10,
+        py: 6,
         px: 5,
-        pb: 6,
       }}
     >
       <AppTypography variant="h2" align="center" color="common.white" mb={6}>
@@ -26,11 +26,11 @@ const Footer = () => {
             mb={5}
             align="center"
           >
-            About Us
+            Về chúng tôi
           </AppTypography>
-          <FooterLink href="#">Aim</FooterLink>
-          <FooterLink href="#">Vision</FooterLink>
-          <FooterLink href="#">Testimonials</FooterLink>
+          <FooterLink href="#">Thông tin về chúng tôi</FooterLink>
+          <FooterLink href="#">Điều khoản</FooterLink>
+          <FooterLink href="#">Liên hệ với chúng tôi</FooterLink>
         </Box>
         <Box className={classes.column}>
           <AppTypography
@@ -40,12 +40,16 @@ const Footer = () => {
             mb={5}
             align="center"
           >
-            Services
+            Menu
           </AppTypography>
-          <FooterLink href="#">Writing</FooterLink>
-          <FooterLink href="#">Internships</FooterLink>
-          <FooterLink href="#">Coding</FooterLink>
-          <FooterLink href="#">Teaching</FooterLink>
+          <FooterLink href={PathConstant.LISTENING_ROOT}>Listening</FooterLink>
+          <FooterLink href={PathConstant.READING_ROOT}>Reading</FooterLink>
+          <FooterLink href={PathConstant.VOCABULARY_ROOT}>
+            Vocabulary
+          </FooterLink>
+          <FooterLink href={PathConstant.TOEIC_TEST_ROOT}>
+            Toeic Test
+          </FooterLink>
         </Box>
         <Box className={classes.column}>
           <AppTypography
@@ -55,43 +59,12 @@ const Footer = () => {
             mb={5}
             align="center"
           >
-            Contact Us
+            Truyền thông xã hội
           </AppTypography>
-          <FooterLink href="#">Uttar Pradesh</FooterLink>
-          <FooterLink href="#">Ahemdabad</FooterLink>
-          <FooterLink href="#">Indore</FooterLink>
-          <FooterLink href="#">Mumbai</FooterLink>
-        </Box>
-        <Box className={classes.column}>
-          <AppTypography
-            variant="overline"
-            fontWeight={700}
-            color="common.white"
-            mb={5}
-            align="center"
-          >
-            Social Media
-          </AppTypography>
-          <FooterLink href="#">
-            <i className="fab fa-facebook-f">
-              <span style={{ marginLeft: "10px" }}>Facebook</span>
-            </i>
-          </FooterLink>
-          <FooterLink href="#">
-            <i className="fab fa-instagram">
-              <span style={{ marginLeft: "10px" }}>Instagram</span>
-            </i>
-          </FooterLink>
-          <FooterLink href="#">
-            <i className="fab fa-twitter">
-              <span style={{ marginLeft: "10px" }}>Twitter</span>
-            </i>
-          </FooterLink>
-          <FooterLink href="#">
-            <i className="fab fa-youtube">
-              <span style={{ marginLeft: "10px" }}>Youtube</span>
-            </i>
-          </FooterLink>
+          <FooterLink href="#">Facebook</FooterLink>
+          <FooterLink href="#">Instagram</FooterLink>
+          <FooterLink href="#">Twitter</FooterLink>
+          <FooterLink href="#">Youtube</FooterLink>
         </Box>
       </Stack>
     </Box>

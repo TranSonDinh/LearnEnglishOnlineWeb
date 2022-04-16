@@ -16,8 +16,12 @@ export default {
   TXT_START: "Bắt đầu",
   TXT_REDO: "Làm lại",
   TXT_LISTENING_QUESTION_TITLE: "Nghe và chọn phương án mà bạn cho là đúng.",
+  TXT_READING_QUESTION_TITLE: "Đọc và chọn phương án mà bạn cho là đúng.",
   TXT_COMPLETE: "Hoàn thành",
   TXT_CANCEL: "Huỷ",
+  TXT_TO_READ: "Làm bài đọc >>",
+  TXT_TO_LISTEN: "<< Làm bài nghe",
+  TXT_HOME: "Trang chủ",
 
   //Placeholder
   P_USERNAME_EMAIL: "Email hoặc tên đăng nhập",
