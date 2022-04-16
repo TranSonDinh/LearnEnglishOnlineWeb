@@ -15,12 +15,18 @@ export default {
   TXT_MOCK_TOEIC_TEST: "Thi thử TOEIC",
   TXT_START: "Bắt đầu",
   TXT_REDO: "Làm lại",
+  TXT_LISTENING_QUESTION_TITLE: "Nghe và chọn phương án mà bạn cho là đúng.",
+  TXT_COMPLETE: "Hoàn thành",
+  TXT_CANCEL: "Huỷ",
 
   //Placeholder
   P_USERNAME_EMAIL: "Enter email or username",
   P_PASSWORD: "Enter password",
   P_USERNAME: "Enter username",
   P_EMAIL: "Enter email",
+
+  //FORMAT
+  FM_QUESTION_NUMBER: "<bold>Câu hỏi {{number}}:</bold> {{message}}",
 
   //Message
   MSG_TERM_SIGN_IN:
