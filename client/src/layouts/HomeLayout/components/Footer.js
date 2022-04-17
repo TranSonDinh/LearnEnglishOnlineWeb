@@ -15,7 +15,7 @@ const Footer = () => {
       }}
     >
       <AppTypography variant="h2" align="center" color="common.white" mb={6}>
-        EFV chào bạn
+        <b>ENGLISH FOR YOU</b> chào bạn
       </AppTypography>
       <Stack direction="row" justifyContent="space-between">
         <Box className={classes.column}>

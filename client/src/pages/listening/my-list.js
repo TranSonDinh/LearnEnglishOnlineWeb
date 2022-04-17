@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Stack } from "@mui/material";
 import { CommonTabs, CommonTitlePage } from "components/common";
 import HomeLayout from "layouts/HomeLayout";
-import { AppPagination, CardItem } from "components";
+import { AppPagination, CardItem, NotFoundData } from "components";
 import { useRouter } from "next/router";
 import { PathConstant } from "const";
 
@@ -25,17 +25,21 @@ const MyListening = () => {
         <CommonTitlePage>{getLabel("TXT_PRACTICE_LISTENING")}</CommonTitlePage>
         <CommonTabs tabs={getListeningTabs(getLabel)} />
         <Stack sx={{ width: "100%", alignItems: "center", mt: 5 }} spacing={3}>
-          {MOCK_DATA.map((item) => (
-            <CardItem
-              key={item?.id}
-              data={item}
-              onClick={() => {
-                onStart(item?.id);
-              }}
-            />
-          ))}
+          {MOCK_DATA?.length > 0 ? (
+            MOCK_DATA.map((item) => (
+              <CardItem
+                key={item?.id}
+                data={item}
+                onClick={() => {
+                  onStart(item?.id);
+                }}
+              />
+            ))
+          ) : (
+            <NotFoundData content={getLabel("MSG_NOT_FOUND_DATA")} />
+          )}
         </Stack>
-        <AppPagination />
+        {MOCK_DATA?.length > 0 && <AppPagination />}
       </Stack>
     </HomeLayout>
   );
@@ -46,59 +50,59 @@ MyListening.propTypes = {};
 export default memo(MyListening);
 
 const MOCK_DATA = [
-  {
-    id: "1",
-    imageSrc: "/12",
-    title: "Bai doc so 1",
-    description: "Hoc ngay nao",
-    isFinished: true,
-  },
-  {
-    id: "2",
-    imageSrc: "/12",
-    title: "Bai doc so 2",
-    description: "Hoc ngay nao",
-    isFinished: true,
-  },
-  {
-    id: "3",
-    imageSrc: "/12",
-    title: "Bai doc so 3",
-    description: "Hoc ngay nao",
-    isFinished: true,
-  },
-  {
-    id: "4",
-    imageSrc: "/12",
-    title: "Bai doc so 4",
-    description: "Hoc ngay nao",
-    isFinished: true,
-  },
-  {
-    id: "5",
-    imageSrc: "/12",
-    title: "Bai doc so 5",
-    description: "Hoc ngay nao",
-    isFinished: true,
-  },
-  {
-    id: "6",
-    imageSrc: "/12",
-    title: "Bai doc so 6",
-    description: "Hoc ngay nao",
-    isFinished: true,
-  },
-  {
-    id: "7",
-    imageSrc: "/12",
-    title: "Bai doc so 7",
-    description: "Hoc ngay nao",
-    isFinished: true,
-  },
-  {
-    id: "8",
-    imageSrc: "/12",
-    title: "Bai doc so 8",
-    description: "Hoc ngay nao",
-  },
+  // {
+  //   id: "1",
+  //   imageSrc: "/12",
+  //   title: "Bai doc so 1",
+  //   description: "Hoc ngay nao",
+  //   isFinished: true,
+  // },
+  // {
+  //   id: "2",
+  //   imageSrc: "/12",
+  //   title: "Bai doc so 2",
+  //   description: "Hoc ngay nao",
+  //   isFinished: true,
+  // },
+  // {
+  //   id: "3",
+  //   imageSrc: "/12",
+  //   title: "Bai doc so 3",
+  //   description: "Hoc ngay nao",
+  //   isFinished: true,
+  // },
+  // {
+  //   id: "4",
+  //   imageSrc: "/12",
+  //   title: "Bai doc so 4",
+  //   description: "Hoc ngay nao",
+  //   isFinished: true,
+  // },
+  // {
+  //   id: "5",
+  //   imageSrc: "/12",
+  //   title: "Bai doc so 5",
+  //   description: "Hoc ngay nao",
+  //   isFinished: true,
+  // },
+  // {
+  //   id: "6",
+  //   imageSrc: "/12",
+  //   title: "Bai doc so 6",
+  //   description: "Hoc ngay nao",
+  //   isFinished: true,
+  // },
+  // {
+  //   id: "7",
+  //   imageSrc: "/12",
+  //   title: "Bai doc so 7",
+  //   description: "Hoc ngay nao",
+  //   isFinished: true,
+  // },
+  // {
+  //   id: "8",
+  //   imageSrc: "/12",
+  //   title: "Bai doc so 8",
+  //   description: "Hoc ngay nao",
+  // },
 ];

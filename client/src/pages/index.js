@@ -1,8 +1,8 @@
 import React from "react";
 import { Divider, Stack } from "@mui/material";
-import { AppTypography } from "components/common";
 import HomeLayout from "layouts/HomeLayout";
 import { AppSlideshow, LearnWith, Skill, WhyChooseBlock } from "components";
+import { ImageConstant } from "const";
 
 const Home = () => {
   return (
@@ -27,15 +27,15 @@ export default Home;
 
 const slideImages = [
   {
-    url: "https://picsum.photos/740",
+    url: ImageConstant.Banner1,
     caption: "Slide 1",
   },
   {
-    url: "https://picsum.photos/740",
+    url: ImageConstant.Banner2,
     caption: "Slide 2",
   },
   {
-    url: "https://picsum.photos/740",
+    url: ImageConstant.Banner3,
     caption: "Slide 3",
   },
 ];

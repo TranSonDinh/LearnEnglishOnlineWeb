@@ -6,11 +6,11 @@ import { Stack } from "@mui/material";
 import ReactAudioPlayer from "react-audio-player";
 import { AppQuestion, CancelButton } from "components";
 import { AppButton, AppTypography } from "components/common";
+import { PathConstant } from "const";
 
 const ListeningDetail = () => {
   const { t: getLabel } = useTranslation();
 
-  const onBack = () => {};
   const onComplete = () => {};
 
   return (
@@ -30,7 +30,7 @@ const ListeningDetail = () => {
           <AppQuestion data={item} />
         ))}
         <Stack direction="row" alignItem="center" spacing={2}>
-          <CancelButton onClick={onBack} />
+          <CancelButton href={PathConstant.LISTENING_ROOT} />
           <AppButton onClick={onComplete} sx={{ width: 132 }}>
             {getLabel("TXT_COMPLETE")}
           </AppButton>

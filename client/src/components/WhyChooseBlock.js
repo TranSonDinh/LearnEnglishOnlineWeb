@@ -8,17 +8,16 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 import PropTypes from "prop-types";
 import StarPurple500Icon from "@mui/icons-material/StarPurple500";
-import LapTopFeature from "public/images/img-laptop-feature.svg";
 
 const WhyChooseBlock = () => {
   const { t: getLabel } = useTranslation(NS_HOME);
 
   return (
-    <Stack sx={{ height: 700, width: 520, p: 5, m: "0 auto" }} spacing={2.5}>
+    <Stack sx={{ width: 520, p: 10, m: "0 auto" }} spacing={2.5}>
       <Box
         component="img"
         sx={{ width: 245, height: 161, m: "0 auto", mb: 6 }}
-        src={LapTopFeature}
+        src={ImageConstant.LapTopFeature}
       />
       <AppTypography variant="h3" mb={3}>
         {getLabel("TXT_WHY_LEARN_ON_WEB")}

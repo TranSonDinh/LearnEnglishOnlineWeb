@@ -5,7 +5,7 @@ import HomeLayout from "layouts/HomeLayout";
 import { Stack } from "@mui/material";
 import { CommonTabs, CommonTitlePage } from "components/common";
 import { getVocabularyTabs } from ".";
-import { AppPagination, CardItem } from "components";
+import { AppPagination, CardItem, NotFoundData } from "components";
 
 const MyVocabulary = () => {
   const { t: getLabel } = useTranslation();
@@ -16,9 +16,11 @@ const MyVocabulary = () => {
         <CommonTitlePage>{getLabel("TXT_LEARNING_VOCABULARY")}</CommonTitlePage>
         <CommonTabs tabs={getVocabularyTabs(getLabel)} />
         <Stack sx={{ width: "100%", alignItems: "center", mt: 5 }} spacing={3}>
-          {MOCK_DATA.map((item) => (
-            <CardItem key={item?.id} data={item} />
-          ))}
+          {MOCK_DATA?.length > 0 ? (
+            MOCK_DATA.map((item) => <CardItem key={item?.id} data={item} />)
+          ) : (
+            <NotFoundData content={getLabel("MSG_NOT_FOUND_DATA")} />
+          )}
         </Stack>
         <AppPagination />
       </Stack>

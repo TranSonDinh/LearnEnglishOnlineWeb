@@ -37,4 +37,5 @@ export default {
     "Khi đăng ký trên EFV, bạn đã đồng ý với <bold>Các chính sách</bold> và <bold>Chính sách bảo mật</bold> của chúng tôi.",
   MSG_FORGOT_PASSWORD:
     "Chúng tôi sẽ gửi hướng dẫn đặt lại mật khẩu của bạn qua email.",
+  MSG_NOT_FOUND_DATA: "Không có bài học nào!",
 };

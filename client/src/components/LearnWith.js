@@ -1,6 +1,7 @@
-import { Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Trans } from "components";
+import { ImageConstant, PathConstant } from "const";
 import { NS_HOME } from "const/lang.const";
 import React, { memo } from "react";
 import { useTranslation } from "react-i18next";
@@ -23,8 +24,13 @@ const LearnWith = () => {
         <AppTypography variant="h6" fontWeight={400} color="text.subText">
           {getLabel("TXT_IELTS_DESCRIPTION")}
         </AppTypography>
-        <AppButton classes={{ root: classes.button }}>
+        <AppButton classes={{ root: classes.button }} disabled>
           {getLabel("TXT_LEARN_NOW")}
+          <Box
+            component="img"
+            src={ImageConstant.ComingSoon}
+            sx={{ width: 70, right: -15, top: -25, position: "absolute" }}
+          />
         </AppButton>
       </Stack>
       <Stack spacing={3}>
@@ -34,7 +40,10 @@ const LearnWith = () => {
         <AppTypography variant="h6" fontWeight={400} color="text.subText">
           {getLabel("TXT_TOEIC_DESCRIPTION")}
         </AppTypography>
-        <AppButton classes={{ root: classes.button }} disabled>
+        <AppButton
+          classes={{ root: classes.button }}
+          href={PathConstant.TOEIC_TEST_ROOT}
+        >
           {getLabel("TXT_LEARN_NOW")}
         </AppButton>
       </Stack>
@@ -48,5 +57,6 @@ const useStyles = makeStyles((theme) => ({
   button: {
     width: 140,
     fontWeight: 700,
+    position: "relative",
   },
 }));

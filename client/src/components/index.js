@@ -14,6 +14,7 @@ import ReadingContainer from "./ReadingContainer";
 import CancelButton from "./CancelButton";
 import CircleNumberList from "./CircleNumberList";
 import CoolDownTimer from "./CoolDownTimer";
+import NotFoundData from "./NotFoundData";
 
 export {
   Trans,
@@ -32,4 +33,5 @@ export {
   CancelButton,
   CircleNumberList,
   CoolDownTimer,
+  NotFoundData,
 };

@@ -25,15 +25,19 @@ const MyToeic = () => {
         <CommonTitlePage>{getLabel("TXT_MOCK_TOEIC_TEST")}</CommonTitlePage>
         <CommonTabs tabs={getToeicTestTabs(getLabel)} />
         <Stack sx={{ width: "100%", alignItems: "center", mt: 5 }} spacing={3}>
-          {MOCK_DATA.map((item) => (
-            <CardItem
-              key={item?.id}
-              data={item}
-              onClick={() => {
-                onStart(item?.id);
-              }}
-            />
-          ))}
+          {MOCK_DATA?.length > 0 ? (
+            MOCK_DATA.map((item) => (
+              <CardItem
+                key={item?.id}
+                data={item}
+                onClick={() => {
+                  onStart(item?.id);
+                }}
+              />
+            ))
+          ) : (
+            <NotFoundData content={getLabel("MSG_NOT_FOUND_DATA")} />
+          )}
         </Stack>
         <AppPagination />
       </Stack>

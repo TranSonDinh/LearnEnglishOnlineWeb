@@ -1,22 +1,25 @@
 import React, { memo } from "react";
 import PropTypes from "prop-types";
-import { AppBar, Stack } from "@mui/material";
+import { AppBar, Box, Button, Stack } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 import clsx from "clsx";
-import { AppButton, AppTypography } from "components/common";
+import { AppButton } from "components/common";
 import { useTranslation } from "react-i18next";
 import HeaderTabs from "./HeaderTabs";
+import { ImageConstant, PathConstant } from "const";
+import { useRouter } from "next/router";
 
 const Header = ({ className, ...otherProps }) => {
   const classes = useStyles();
   const { t: getLabel } = useTranslation();
+  const route = useRouter();
 
   return (
     <AppBar
-      id={HEADER_ID}
       position="fixed"
       className={clsx(classes.root, className)}
       elevation={0}
+      id="back-to-top-anchor"
       {...otherProps}
     >
       <Stack
@@ -24,13 +27,21 @@ const Header = ({ className, ...otherProps }) => {
         alignItems="center"
         className={classes.stackCenter}
       >
-        <AppTypography variant="h2">EFV</AppTypography>
+        <Button href={PathConstant.ROOT}>
+          <Box component="img" src={ImageConstant.Logo} sx={{ height: 70 }} />
+        </Button>
         <HeaderTabs />
         <Stack direction="row" spacing={1.5}>
-          <AppButton classes={{ contained: classes.btnSignIn }}>
+          <AppButton
+            href={PathConstant.SIGN_IN}
+            classes={{ contained: classes.btnSignIn }}
+          >
             {getLabel("TXT_SIGN_IN")}
           </AppButton>
-          <AppButton classes={{ contained: classes.btnSignUp }}>
+          <AppButton
+            href={PathConstant.SIGN_UP}
+            classes={{ contained: classes.btnSignUp }}
+          >
             {getLabel("TXT_SIGN_UP")}
           </AppButton>
         </Stack>

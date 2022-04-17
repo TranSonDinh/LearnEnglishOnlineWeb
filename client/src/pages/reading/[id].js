@@ -5,6 +5,7 @@ import HomeLayout from "layouts/HomeLayout";
 import { Stack } from "@mui/material";
 import { AppButton, AppTypography } from "components/common";
 import { AppQuestion, CancelButton, ReadingContainer } from "components";
+import { PathConstant } from "const";
 
 const ReadingDetail = () => {
   const { t: getLabel } = useTranslation();
@@ -34,7 +35,7 @@ const ReadingDetail = () => {
           <AppQuestion data={item} />
         ))}
         <Stack direction="row" alignItem="center" spacing={2}>
-          <CancelButton onClick={onBack} />
+          <CancelButton href={PathConstant.READING_ROOT} />
           <AppButton onClick={onComplete} sx={{ width: 132 }}>
             {getLabel("TXT_COMPLETE")}
           </AppButton>

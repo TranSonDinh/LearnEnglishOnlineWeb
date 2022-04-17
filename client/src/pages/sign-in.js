@@ -1,8 +1,10 @@
 import React, { memo } from "react";
 import {
   Avatar,
+  Box,
   Checkbox,
   FormControlLabel,
+  IconButton,
   Stack,
   TextField,
 } from "@mui/material";
@@ -10,8 +12,8 @@ import { AppButton, AppTypography } from "components/common";
 import { makeStyles } from "@mui/styles";
 import MainLayout from "layouts/MainLayout";
 import { useTranslation } from "react-i18next";
-import { Trans } from "components";
 import { PathConstant } from "const";
+import CloseIcon from "@mui/icons-material/Close";
 
 const SignIn = () => {
   const classes = useStyles();
@@ -19,64 +21,69 @@ const SignIn = () => {
 
   return (
     <MainLayout>
-      <Stack
-        justifyContent="center"
-        alignItems="center"
-        className={classes.container}
-      >
-        <Avatar sx={{ backgroundColor: "#1bbd7e", width: 50, height: 50 }} />
-        <AppTypography variant="h3" m={2}>
-          {getLabel("TXT_SIGN_IN")}
-        </AppTypography>
-        <TextField
-          placeholder={getLabel("P_USERNAME_EMAIL")}
-          fullWidth
-          required
-          className={classes.input}
-        />
-        <TextField
-          placeholder={getLabel("P_PASSWORD")}
-          type="password"
-          fullWidth
-          required
-          className={classes.input}
-          InputProps={{
-            endAdornment: (
-              <AppButton
-                variant="text"
-                href={PathConstant.FORGOT_PASSWORD}
-                disableRipple
-                className={classes.forgotPassword}
-              >
-                {getLabel("TXT_FORGET")}
-              </AppButton>
-            ),
-          }}
-        />
-        <FormControlLabel
-          control={<Checkbox name="checkedB" color="primary" />}
-          label={getLabel("TXT_REMEMBER_ME")}
-          className={classes.checkbox}
-        />
-        <AppButton
-          type="submit"
-          color="primary"
-          variant="contained"
-          fullWidth
-          className={classes.btn}
+      <Box position="relative" width="100%" height="100%">
+        <Stack
+          justifyContent="center"
+          alignItems="center"
+          className={classes.container}
         >
-          {getLabel("TXT_SIGN_IN")}
+          <Avatar sx={{ backgroundColor: "#1bbd7e", width: 50, height: 50 }} />
+          <AppTypography variant="h3" m={2}>
+            {getLabel("TXT_SIGN_IN")}
+          </AppTypography>
+          <TextField
+            placeholder={getLabel("P_USERNAME_EMAIL")}
+            fullWidth
+            required
+            className={classes.input}
+          />
+          <TextField
+            placeholder={getLabel("P_PASSWORD")}
+            type="password"
+            fullWidth
+            required
+            className={classes.input}
+            InputProps={{
+              endAdornment: (
+                <AppButton
+                  variant="text"
+                  href={PathConstant.FORGOT_PASSWORD}
+                  disableRipple
+                  className={classes.forgotPassword}
+                >
+                  {getLabel("TXT_FORGET")}
+                </AppButton>
+              ),
+            }}
+          />
+          <FormControlLabel
+            control={<Checkbox name="checkedB" color="primary" />}
+            label={getLabel("TXT_REMEMBER_ME")}
+            className={classes.checkbox}
+          />
+          <AppButton
+            type="submit"
+            color="primary"
+            variant="contained"
+            fullWidth
+            className={classes.btn}
+          >
+            {getLabel("TXT_SIGN_IN")}
+          </AppButton>
+          <AppTypography>
+            {/* <Trans i18next={getLabel("MSG_TERM_SIGN_IN")} /> */}
+          </AppTypography>
+        </Stack>
+        <AppButton
+          classes={{ root: classes.btnRedirect }}
+          href={PathConstant.SIGN_UP}
+        >
+          {getLabel("TXT_SIGN_UP")}
         </AppButton>
-        <AppTypography>
-          {/* <Trans i18next={getLabel("MSG_TERM_SIGN_IN")} /> */}
-        </AppTypography>
-      </Stack>
-      <AppButton
-        classes={{ root: classes.btnRedirect }}
-        href={PathConstant.SIGN_UP}
-      >
-        {getLabel("TXT_SIGN_UP")}
-      </AppButton>
+        <IconButton className={classes.iconClose} href={PathConstant.ROOT}>
+          <CloseIcon sx={{ fontSize: 32 }} />
+        </IconButton>
+      </Box>
     </MainLayout>
   );
 };
@@ -129,5 +136,11 @@ const useStyles = makeStyles((theme) => ({
       fontWeight: 700,
       color: "#777",
     },
+  },
+  iconClose: {
+    position: "absolute",
+    top: 20,
+    left: 20,
+    color: "#777",
   },
 }));

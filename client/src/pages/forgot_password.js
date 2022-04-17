@@ -1,17 +1,11 @@
 import React, { memo } from "react";
-import {
-  Avatar,
-  Checkbox,
-  FormControlLabel,
-  Stack,
-  TextField,
-} from "@mui/material";
+import { Box, IconButton, Stack, TextField } from "@mui/material";
 import { AppButton, AppTypography } from "components/common";
 import { makeStyles } from "@mui/styles";
 import MainLayout from "layouts/MainLayout";
 import { useTranslation } from "react-i18next";
-import { Trans } from "components";
 import { PathConstant } from "const";
+import CloseIcon from "@mui/icons-material/Close";
 
 const SignIn = () => {
   const classes = useStyles();
@@ -19,45 +13,50 @@ const SignIn = () => {
 
   return (
     <MainLayout>
-      <Stack
-        justifyContent="center"
-        alignItems="center"
-        className={classes.container}
-      >
-        <AppTypography variant="h3" m={2}>
-          {getLabel("TXT_FORGOT_PASSWORD")}
-        </AppTypography>
-        <AppTypography
-          variant="subtitle2"
-          fontWeight={400}
-          align="center"
-          mb={1}
-          color="#3c3c3c"
+      <Box position="relative" width="100%" height="100%">
+        <Stack
+          justifyContent="center"
+          alignItems="center"
+          className={classes.container}
         >
-          {getLabel("MSG_FORGOT_PASSWORD")}
-        </AppTypography>
-        <TextField
-          placeholder={getLabel("P_EMAIL")}
-          fullWidth
-          required
-          className={classes.input}
-        />
+          <AppTypography variant="h3" m={2}>
+            {getLabel("TXT_FORGOT_PASSWORD")}
+          </AppTypography>
+          <AppTypography
+            variant="subtitle2"
+            fontWeight={400}
+            align="center"
+            mb={1}
+            color="#3c3c3c"
+          >
+            {getLabel("MSG_FORGOT_PASSWORD")}
+          </AppTypography>
+          <TextField
+            placeholder={getLabel("P_EMAIL")}
+            fullWidth
+            required
+            className={classes.input}
+          />
+          <AppButton
+            type="submit"
+            color="primary"
+            variant="contained"
+            fullWidth
+            className={classes.btn}
+          >
+            {getLabel("TXT_SEND")}
+          </AppButton>
+        </Stack>
         <AppButton
-          type="submit"
-          color="primary"
-          variant="contained"
-          fullWidth
-          className={classes.btn}
+          classes={{ root: classes.btnRedirect }}
+          href={PathConstant.SIGN_IN}
         >
-          {getLabel("TXT_SEND")}
+          {getLabel("TXT_SIGN_IN")}
         </AppButton>
-      </Stack>
-      <AppButton
-        classes={{ root: classes.btnRedirect }}
-        href={PathConstant.SIGN_IN}
-      >
-        {getLabel("TXT_SIGN_IN")}
-      </AppButton>
+        <IconButton className={classes.iconClose} href={PathConstant.SIGN_IN}>
+          <CloseIcon sx={{ fontSize: 32 }} />
+        </IconButton>
+      </Box>
     </MainLayout>
   );
 };
@@ -111,5 +110,11 @@ const useStyles = makeStyles((theme) => ({
       fontWeight: 700,
       color: "#777",
     },
+  },
+  iconClose: {
+    position: "absolute",
+    top: 20,
+    left: 20,
+    color: "#777",
   },
 }));

@@ -5,7 +5,7 @@ import HomeLayout from "layouts/HomeLayout";
 import { Stack } from "@mui/material";
 import { AppTypography, CommonTabs, CommonTitlePage } from "components/common";
 import { PathConstant } from "const";
-import { AppPagination, CardItem } from "components";
+import { AppPagination, CardItem, NotFoundData } from "components";
 import { useRouter } from "next/router";
 
 const ToeicTest = (props) => {
@@ -24,15 +24,19 @@ const ToeicTest = (props) => {
         <CommonTitlePage>{getLabel("TXT_MOCK_TOEIC_TEST")}</CommonTitlePage>
         <CommonTabs tabs={getToeicTestTabs(getLabel)} />
         <Stack sx={{ width: "100%", alignItems: "center", mt: 5 }} spacing={3}>
-          {MOCK_DATA.map((item) => (
-            <CardItem
-              key={item?.id}
-              data={item}
-              onClick={() => {
-                onStart(item?.id);
-              }}
-            />
-          ))}
+          {MOCK_DATA?.length > 0 ? (
+            MOCK_DATA.map((item) => (
+              <CardItem
+                key={item?.id}
+                data={item}
+                onClick={() => {
+                  onStart(item?.id);
+                }}
+              />
+            ))
+          ) : (
+            <NotFoundData content={getLabel("MSG_NOT_FOUND_DATA")} />
+          )}
         </Stack>
         <AppPagination />
       </Stack>
