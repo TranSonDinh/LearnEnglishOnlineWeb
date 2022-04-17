@@ -6,6 +6,7 @@ import AppCard from "./AppCard";
 import AppContent from "./AppContent";
 import AppCircleNumber from "./AppCircleNumber";
 import CommonHeaderTab from "./CommonHeaderTab";
+import AppSelect from "./AppSelect";
 
 export {
   AppTypography,
@@ -16,4 +17,5 @@ export {
   AppContent,
   AppCircleNumber,
   CommonHeaderTab,
+  AppSelect,
 };

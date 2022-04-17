@@ -22,6 +22,15 @@ export default {
   TXT_TO_READ: "Làm bài đọc >>",
   TXT_TO_LISTEN: "<< Làm bài nghe",
   TXT_HOME: "Trang chủ",
+  TXT_LOGOUT: "Đăng xuất",
+
+  TXT_ADMIN_LISTENING: "Quản lý Bài nghe",
+  TXT_ADMIN_READING: "Quản lý Bài đọc",
+  TXT_ADMIN_TEST: "Quản lý Đề thi",
+  TXT_ADMIN_VOCABULARY: "Quản lý Từ vựng",
+  TXT_ADMIN_USERS: "Quản lý Tài khoản",
+  TXT_ADMIN_ACCOUNT: "Thông tin cá nhân",
+  TXT_CHANGE_PASSWORD: "Đổi mật khẩu",
 
   //Placeholder
   P_USERNAME_EMAIL: "Email hoặc tên đăng nhập",

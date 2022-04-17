@@ -895,7 +895,7 @@ damerau-levenshtein@^1.0.7:
   resolved "https://registry.yarnpkg.com/damerau-levenshtein/-/damerau-levenshtein-1.0.8.tgz#b43d286ccbd36bc5b2f7ed41caf2d0aba1f8a6e7"
   integrity sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==
 
-date-fns@^2.28.0:
+date-fns@2.28.0:
   version "2.28.0"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.28.0.tgz#9570d656f5fc13143e50c975a3b6bbeb46cd08b2"
   integrity sha512-8d35hViGYx/QH0icHYCeLmsLmMUheMmTyV9Fcm6gvNwdw31yXXH+O85sOBJ+OLnLQMKZowvpKb6FgMIQjcpvQw==
@@ -2144,7 +2144,7 @@ ramda@^0.27.1:
   resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.27.2.tgz#84463226f7f36dc33592f6f4ed6374c48306c3f1"
   integrity sha512-SbiLPU40JuJniHexQSAgad32hfwd+DRUdwF2PlVuI5RZD0/vahUco7R8vD86J/tcEKKF9vZrUVwgtmGCqlCKyA==
 
-react-audio-player@^0.17.0:
+react-audio-player@0.17.0:
   version "0.17.0"
   resolved "https://registry.yarnpkg.com/react-audio-player/-/react-audio-player-0.17.0.tgz#4be7b1952512801f36ba0865a9c98f7b108f991e"
   integrity sha512-aCZgusPxA9HK7rLZcTdhTbBH9l6do9vn3NorgoDZRxRxJlOy9uZWzPaKjd7QdcuP2vXpxGA/61JMnnOEY7NXeA==
@@ -2195,7 +2195,7 @@ react-redux@7.2.8:
     prop-types "^15.7.2"
     react-is "^17.0.2"
 
-react-slideshow-image@^3.7.3:
+react-slideshow-image@3.7.3:
   version "3.7.3"
   resolved "https://registry.yarnpkg.com/react-slideshow-image/-/react-slideshow-image-3.7.3.tgz#9307901eae0409aa5a1a04e002c22077cd0bf4fb"
   integrity sha512-GFZiRqsSCYk6m4m+WDSoxPJBe3YjcsySYrOt4aw+i1TEBb1MHJZKdEkO2Ou+z4bgZBNzQngWLLtRhqyt84ONMQ==
