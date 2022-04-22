@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
 import PropTypes from "prop-types";
 import HomeLayout from "layouts/HomeLayout";
 import { Stack } from "@mui/material";
@@ -8,16 +8,28 @@ import { PathConstant } from "const";
 import { AppPagination, CardItem, NotFoundData } from "components";
 import { useRouter } from "next/router";
 import StringFormat from "string-format";
+import { useDispatch, useSelector } from "react-redux";
+import ReadingActions from "redux/reading.redux";
 
 const Reading = () => {
   const { t: getLabel } = useTranslation();
   const route = useRouter();
+  const dispatch = useDispatch();
+
+  const readingsRedux = useSelector(
+    ({ readingRedux }) => readingRedux.readings
+  );
 
   const onStart = (id) => {
+    console.log(id);
     if (id) {
       route.push(`${PathConstant.READING_ROOT}/${id}`);
     }
   };
+
+  useEffect(() => {
+    dispatch(ReadingActions.getReadingList());
+  }, [dispatch]);
 
   return (
     <HomeLayout>
@@ -25,13 +37,13 @@ const Reading = () => {
         <CommonTitlePage>{getLabel("TXT_PRACTICE_READING")}</CommonTitlePage>
         <CommonTabs tabs={getReadingTabs(getLabel)} />
         <Stack sx={{ width: "100%", alignItems: "center", mt: 5 }} spacing={3}>
-          {MOCK_DATA?.length > 0 ? (
-            MOCK_DATA.map((item) => (
+          {readingsRedux?.length > 0 ? (
+            readingsRedux.map((item) => (
               <CardItem
-                key={item?.id}
+                key={item?._id}
                 data={item}
                 onClick={() => {
-                  onStart(item?.id);
+                  onStart(item?._id);
                 }}
               />
             ))
@@ -73,7 +85,7 @@ const MOCK_DATA = [
     imageSrc: "/12",
     title: "Bai doc so 2",
     description: "Hoc ngay nao",
-    isFinished: "50%",
+    isFinished: 50,
   },
   {
     id: "3",

@@ -22,7 +22,7 @@ CardItem.propTypes = {
   data: PropTypes.shape({
     id: PropTypes.string,
     imageSrc: PropTypes.string,
-    isFinished: PropTypes.bool,
+    isFinished: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
     title: PropTypes.string,
     description: PropTypes.string,
     isSaved: PropTypes.bool,

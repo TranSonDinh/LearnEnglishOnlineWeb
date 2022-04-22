@@ -15,4 +15,9 @@ export const STT_FORBIDDEN = 403;
 export const STT_NOT_FOUND = 404;
 export const STT_INTERNAL_SERVER = 500;
 
-export const BASE_URL = "/";
+export const BASE_URL = "http://localhost:3001";
+
+export const GET_READING_LIST = "/readings";
+export const GET_LISTENING_LIST = "/listenings";
+export const GET_TESTING_LIST = "/testings";
+export const GET_VOCABULARY_LIST = "/vocabulary";

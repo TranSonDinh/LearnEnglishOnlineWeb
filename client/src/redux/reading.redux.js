@@ -2,17 +2,19 @@ import { createReducer, createActions } from "reduxsauce";
 
 /* ------------- Types and Action Creators ------------- */
 const { Types, Creators } = createActions({
+  getReadingList: ["data"],
   success: ["data"],
   failure: ["data"],
   reset: [],
 });
 
-export const AccountTypes = Types;
+export const ReadingTypes = Types;
 export default Creators;
 
 /* ------------- Initial State ------------- */
 export const INITIAL_STATE = {
   isFetching: false,
+  readings: [],
 };
 
 /* ------------- Reducers ------------- */
@@ -33,7 +35,7 @@ export const success = (state, action) => {
 };
 
 export const failure = (state, action) => {
-  const data = action.data ? action.data : {};
+  const data = action.data || {};
   return {
     ...state,
     isFetching: false,
@@ -43,6 +45,7 @@ export const failure = (state, action) => {
 
 /* ------------- Mapping ------------- */
 export const HANDLERS = {
+  [Types.GET_READING_LIST]: request,
   [Types.RESET]: reset,
   [Types.SUCCESS]: success,
   [Types.FAILURE]: failure,
