@@ -51,7 +51,7 @@ const BORDER_WIDTH = 2;
 const getBackground = (background) => {
   switch (background) {
     case "light":
-      return palette.background.paper;
+      return palette.background.default;
     case "dark":
       return palette.grey[800];
     default:

@@ -1,7 +1,7 @@
 import React, { memo, useState } from "react";
 import PropTypes from "prop-types";
 import AdminLayout from "layouts/AdminLayout";
-import { AppButton, AppSelect, AppTypography } from "components/common";
+import { AppTypography } from "components/common";
 import {
   IconButton,
   Stack,
@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import SearchIcon from "@mui/icons-material/Search";
+import AddButton from "./AddButton";
 
 const Listening = (props) => {
   const classes = useStyles();
@@ -39,9 +40,7 @@ const Listening = (props) => {
     <AdminLayout>
       <Stack flexGrow={1} spacing={2} sx={{ px: 4, pt: 5, pb: 4 }}>
         <AppTypography variant="h3">Quản lý Bài Đọc</AppTypography>
-        <AppButton classes={{ contained: classes.contained }}>
-          Thêm mới
-        </AppButton>
+        <AddButton />
         <Stack direction="row" justifyContent="flex-end" spacing={1}>
           <TextField
             className={classes.search}
@@ -89,16 +88,6 @@ Listening.propTypes = {};
 export default memo(Listening);
 
 const useStyles = makeStyles((theme) => ({
-  contained: {
-    width: 200,
-    background: theme.palette.success.main,
-    borderRadius: 5,
-    boxShadow: "unset",
-    "&:hover": {
-      background: theme.palette.success.main,
-      boxShadow: "unset",
-    },
-  },
   filterButton: {
     width: 100,
     height: 40,

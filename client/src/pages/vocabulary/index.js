@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
 import PropTypes from "prop-types";
 import HomeLayout from "layouts/HomeLayout";
 import { Stack } from "@mui/material";
@@ -6,9 +6,20 @@ import { CommonTabs, CommonTitlePage } from "components/common";
 import { PathConstant } from "const";
 import { useTranslation } from "react-i18next";
 import { AppPagination, CardItem, NotFoundData } from "components";
+import { useDispatch, useSelector } from "react-redux";
+import VocabularyActions from "redux/vocabulary.redux";
 
 const Vocabulary = () => {
   const { t: getLabel } = useTranslation();
+  const dispatch = useDispatch();
+
+  const vocabularyRedux = useSelector(
+    ({ vocabularyRedux }) => vocabularyRedux.vocabulary
+  );
+
+  useEffect(() => {
+    dispatch(VocabularyActions.getVocabularyList());
+  }, [dispatch]);
 
   return (
     <HomeLayout>
@@ -16,8 +27,10 @@ const Vocabulary = () => {
         <CommonTitlePage>{getLabel("TXT_LEARNING_VOCABULARY")}</CommonTitlePage>
         <CommonTabs tabs={getVocabularyTabs(getLabel)} />
         <Stack sx={{ width: "100%", alignItems: "center", mt: 5 }} spacing={3}>
-          {MOCK_DATA?.length > 0 ? (
-            MOCK_DATA.map((item) => <CardItem key={item?.id} data={item} />)
+          {vocabularyRedux?.length > 0 ? (
+            vocabularyRedux.map((item) => (
+              <CardItem key={item?.id} data={item} />
+            ))
           ) : (
             <NotFoundData content={getLabel("MSG_NOT_FOUND_DATA")} />
           )}
@@ -40,72 +53,5 @@ export const getVocabularyTabs = (getLabel) => [
   {
     label: getLabel("TXT_SAVED"),
     path: PathConstant.MY_VOCABULARY,
-  },
-];
-
-const MOCK_DATA = [
-  {
-    id: "1",
-    title: "Bai doc so 1",
-    description: "Hoc ngay nao",
-    example: "Tu nay co nghia la gi",
-    isSaved: true,
-  },
-  {
-    id: "2",
-    title: "Bai doc so 2",
-    description: "Hoc ngay nao",
-    example: "Tu nay co nghia la gi",
-    isSaved: true,
-  },
-  {
-    id: "3",
-    title: "Bai doc so 3",
-    description: "Hoc ngay nao",
-    example: "Tu nay co nghia la gi",
-  },
-  {
-    id: "4",
-    title: "Bai doc so 4",
-    description: "Hoc ngay nao",
-    example: "Tu nay co nghia la gi",
-  },
-  {
-    id: "5",
-    title: "Bai doc so 5",
-    description: "Hoc ngay nao",
-    example: "Tu nay co nghia la gi",
-
-    isSaved: true,
-  },
-  {
-    id: "6",
-    title: "Bai doc so 6",
-    description: "Hoc ngay nao",
-    example: "Tu nay co nghia la gi",
-  },
-  {
-    id: "7",
-    title: "Bai doc so 7",
-    description: "Hoc ngay nao",
-    example: "Tu nay co nghia la gi",
-  },
-  {
-    id: "8",
-    title: "Bai doc so 8",
-    description: "Hoc ngay nao",
-    example: "Tu nay co nghia la gi",
-  },
-  {
-    id: "9",
-    title: "Bai doc so 9",
-    description: "Hoc ngay nao",
-    example: "Tu nay co nghia la gi",
-  },
-  {
-    id: "10",
-    title: "Bai doc so 10",
-    description: "Hoc ngay nao",
-    example: "Tu nay co nghia la gi",
   },
 ];
