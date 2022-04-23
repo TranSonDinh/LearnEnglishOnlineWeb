@@ -6,13 +6,14 @@ const schema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    description: {
+    content: {
       type: String,
       required: true,
     },
     imageSrc: {
       type: String,
     },
+    question: { type: String, required: true },
     answers: {
       type: Array,
       required: true,

@@ -21,7 +21,6 @@ const Reading = () => {
   );
 
   const onStart = (id) => {
-    console.log(id);
     if (id) {
       route.push(`${PathConstant.READING_ROOT}/${id}`);
     }

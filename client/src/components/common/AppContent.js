@@ -12,7 +12,7 @@ import { makeStyles } from "@mui/styles";
 
 const AppContent = ({
   title,
-  description,
+  content,
   isFinished,
   isSaved,
   example,
@@ -30,7 +30,7 @@ const AppContent = ({
           {title}
         </FinishLabelWithIcon>
         <AppTypography variant="h6" fontWeight={400} color="text.subText">
-          {description}
+          {content}
         </AppTypography>
         {example && <AppTypography>{example}</AppTypography>}
       </Stack>
@@ -59,7 +59,7 @@ const AppContent = ({
 AppContent.propTypes = {
   isFinished: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   title: PropTypes.node,
-  description: PropTypes.string,
+  content: PropTypes.string,
   isSaved: PropTypes.bool,
   onClick: PropTypes.func,
 };

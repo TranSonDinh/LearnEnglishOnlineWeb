@@ -8,7 +8,7 @@ const CardItem = ({ data, onClick, ...otherProps }) => {
       <AppContent
         id={data?.id}
         title={data?.title}
-        description={data?.description}
+        content={data?.content}
         isFinished={data?.isFinished}
         isSaved={data?.isSaved}
         example={data?.example}
@@ -24,7 +24,7 @@ CardItem.propTypes = {
     imageSrc: PropTypes.string,
     isFinished: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
     title: PropTypes.string,
-    description: PropTypes.string,
+    content: PropTypes.string,
     isSaved: PropTypes.bool,
     example: PropTypes.string,
   }),

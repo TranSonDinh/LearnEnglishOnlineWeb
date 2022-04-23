@@ -1,4 +1,4 @@
-import React, { memo, useReducer, useState } from "react";
+import React, { memo, useEffect, useMemo, useReducer, useState } from "react";
 import PropTypes from "prop-types";
 import {
   AppButton,
@@ -10,7 +10,8 @@ import {
 import { makeStyles } from "@mui/styles";
 import { useTranslation } from "react-i18next";
 import { Stack } from "@mui/material";
-import { AppConstant } from "const";
+import { ApiConstant, AppConstant } from "const";
+import { ReadingService } from "services";
 
 const AddButton = () => {
   const classes = useStyles();
@@ -23,23 +24,63 @@ const AddButton = () => {
   const [answerB, setAnswerB] = useState("");
   const [answerC, setAnswerC] = useState("");
   const [answerD, setAnswerD] = useState("");
-  const [trueAnswer, setTrueAnswer] = useState(
-    AppConstant.DEFAULT_ANSWER[0].value
-  );
-  console.log(
-    title,
-    content,
-    question,
-    answerA,
-    answerB,
-    answerC,
-    answerD,
-    trueAnswer
-  );
+
+  const options = useMemo(() => {
+    let arr = AppConstant.DEFAULT_ANSWER;
+    arr[0].value = Boolean(answerA) ? 0 : "";
+    arr[1].value = Boolean(answerB) ? 1 : "";
+    arr[2].value = Boolean(answerC) ? 2 : "";
+    arr[3].value = Boolean(answerD) ? 3 : "";
+    arr = arr.filter((item) => item.value !== "");
+    return arr.length > 0
+      ? arr
+      : [{ label: "Vui lòng điền đáp án bên trên", value: "" }];
+  }, [answerA, answerB, answerC, answerD]);
+
+  const [trueAnswer, setTrueAnswer] = useState(options[0]?.value);
+
   const [open, toggleOpen] = useReducer(
     (currentStatus, nextStatus) => nextStatus ?? !currentStatus,
     false
   );
+
+  const onCreate = () => {
+    try {
+      const newArr = [answerA, answerB, answerC, answerD];
+      const newAnswers = options.map(({ value }) => ({
+        content: newArr[value],
+        isTrue: value === trueAnswer,
+      }));
+
+      ReadingService.createReading({
+        title: title,
+        content: content,
+        question: question,
+        answers: newAnswers,
+      }).then((res) => {
+        if (res.status === ApiConstant.STT_OK) {
+          toggleOpen(false);
+          reset();
+        }
+      });
+    } catch (error) {
+      window.isDebug && console.log(error);
+    }
+  };
+
+  const reset = () => {
+    setTitle("");
+    setContent("");
+    setQuestion("");
+    setAnswerA("");
+    setAnswerB("");
+    setAnswerC("");
+    setAnswerD("");
+  };
+
+  useEffect(() => {
+    setTrueAnswer(options[0]?.value);
+  }, [options]);
 
   return (
     <>
@@ -132,12 +173,12 @@ const AddButton = () => {
             {getLabel("TXT_TRUE_ANSWER")}
           </AppTypography>
           <AppSelect
-            options={AppConstant.DEFAULT_ANSWER}
+            options={options}
             value={trueAnswer}
             onChange={(e) => setTrueAnswer(e.target.value)}
           />
         </Stack>
-        <AppButton classes={{ root: classes.btn }}>
+        <AppButton classes={{ root: classes.btn }} onClick={onCreate}>
           {getLabel("TXT_CREATE")}
         </AppButton>
       </AppDialog>
