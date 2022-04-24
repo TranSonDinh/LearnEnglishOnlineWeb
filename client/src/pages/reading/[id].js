@@ -21,11 +21,15 @@ const ReadingDetail = () => {
 
   useEffect(() => {
     if (id) {
-      ReadingService.getReadingDetail(id).then((res) => {
-        if (res.status === ApiConstant.STT_OK) {
-          setData(res.data[0]);
-        }
-      });
+      try {
+        ReadingService.getReadingDetail(id).then((res) => {
+          if (res.status === ApiConstant.STT_OK) {
+            setData(res.data[0]);
+          }
+        });
+      } catch (error) {
+        window.isDebug && console.log(error);
+      }
     }
   }, [id]);
 
