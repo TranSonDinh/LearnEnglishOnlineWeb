@@ -8,3 +8,7 @@ export const getReadingList = () => {
 export const createReading = (data) => {
   return postApi(ApiConstant.GET_READING_LIST, data);
 };
+
+export const getReadingDetail = (id) => {
+  return getApi(`${ApiConstant.GET_READING_LIST}/${id}`);
+};

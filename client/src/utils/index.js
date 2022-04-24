@@ -1,3 +1,5 @@
+import { read, utils } from "xlsx";
+
 export const uuid = () => {
   return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
     .replace(/[xy]/g, function (c) {
@@ -26,4 +28,20 @@ export const formatNumber = (
     window.isDebug && console.log(error);
     return number;
   }
+};
+
+export const handleFile = (file, onChangeData) => {
+  const reader = new FileReader();
+  const rABS = !!reader.readAsBinaryString;
+  reader.onload = (e) => {
+    const bstr = e.target.result;
+    const wb = read(bstr, { type: rABS ? "binary" : "array" });
+    const wsname = wb.SheetNames[0];
+    const ws = wb.Sheets[wsname];
+    const data = utils.sheet_to_json(ws, { header: 1 });
+    data.shift();
+    onChangeData(data);
+  };
+  if (rABS) reader.readAsBinaryString(file);
+  else reader.readAsArrayBuffer(file);
 };

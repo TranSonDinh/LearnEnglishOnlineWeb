@@ -29,7 +29,7 @@ const ListeningDetail = () => {
         {MOCK_DATA.map((item) => (
           <AppQuestion data={item} />
         ))}
-        <Stack direction="row" alignItem="center" spacing={2}>
+        <Stack direction="row" alignItems="center" spacing={2}>
           <CancelButton href={PathConstant.LISTENING_ROOT} />
           <AppButton onClick={onComplete} sx={{ width: 132 }}>
             {getLabel("TXT_COMPLETE")}

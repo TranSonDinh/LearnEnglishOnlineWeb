@@ -1,7 +1,7 @@
 import React, { memo, useState } from "react";
 import PropTypes from "prop-types";
 import AdminLayout from "layouts/AdminLayout";
-import { AppTypography } from "components/common";
+import { AppButton, AppSelect, AppTypography } from "components/common";
 import {
   IconButton,
   Stack,
@@ -15,14 +15,11 @@ import {
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import SearchIcon from "@mui/icons-material/Search";
-import { useTranslation } from "react-i18next";
-import AddButton from "./AddButton";
 
 const Listening = (props) => {
   const classes = useStyles();
   const [searched, setSearched] = useState("");
   const [rows, setRows] = useState(MOCK_DATA);
-  const { t: getLabel } = useTranslation();
 
   const requestSearch = (searchedVal) => {
     const filteredRows = MOCK_DATA.filter((row) => {
@@ -41,8 +38,10 @@ const Listening = (props) => {
   return (
     <AdminLayout>
       <Stack flexGrow={1} spacing={2} sx={{ px: 4, pt: 5, pb: 4 }}>
-        <AppTypography variant="h3">Quản lý Bài Đọc</AppTypography>
-        <AddButton />
+        <AppTypography variant="h3">Quản lý Từ Vựng</AppTypography>
+        <AppButton classes={{ contained: classes.contained }}>
+          Thêm mới
+        </AppButton>
         <Stack direction="row" justifyContent="flex-end" spacing={1}>
           <TextField
             className={classes.search}

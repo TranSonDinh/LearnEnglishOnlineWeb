@@ -10,27 +10,32 @@ const AppQuestion = ({
   value,
   onChange,
   questionContent,
+  numberQuestion,
   ...otherProps
 }) => {
   const { t: getLabel } = useTranslation();
-
   return (
     <Stack width={600} mt={2} {...otherProps}>
       <AppTypography>
         <Trans
           i18nKey={getLabel("FM_QUESTION_NUMBER", {
-            number: data?.numberQuestion,
-            message: data?.message,
+            number: numberQuestion,
+            message: data?.title,
           })}
         />
       </AppTypography>
       {Boolean(questionContent) && questionContent}
-      <RadioGroup value={value} onChange={() => onChange(data?.numberQuestion)}>
-        {data?.choose?.map(({ value, label }, index) => (
+      <RadioGroup
+        value={value}
+        onChange={(e) => {
+          onChange(data?._id, e.target.value);
+        }}
+      >
+        {data?.answers?.map(({ content }, index) => (
           <FormControlLabel
-            value={value}
+            value={content}
             key={index}
-            label={label}
+            label={content}
             control={<Radio />}
             sx={{ width: "fit-content" }}
           />
@@ -45,11 +50,11 @@ AppQuestion.propTypes = {
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     label: PropTypes.string,
     message: PropTypes.string,
-    numberQuestion: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   }),
   questionContent: PropTypes.node,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func,
+  numberQuestion: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
 AppQuestion.defaultProps = {
@@ -57,3 +62,16 @@ AppQuestion.defaultProps = {
 };
 
 export default memo(AppQuestion);
+
+const getLabelAnswer = (number) => {
+  switch (number) {
+    case 0:
+      return "A";
+    case 1:
+      return "B";
+    case 2:
+      return "C";
+    case 3:
+      return "D";
+  }
+};

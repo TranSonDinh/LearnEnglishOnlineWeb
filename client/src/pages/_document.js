@@ -23,7 +23,7 @@ export default class MyDocument extends Document {
           />
           <script src="https://cdn.jsdelivr.net/npm/resize-observer-polyfill@1.5.1/dist/ResizeObserver.min.js"></script>
           <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.2/dist/chart.js"></script>
-
+          {/* <script src="xlsx.full.min.js"></script> */}
           <script
             dangerouslySetInnerHTML={{
               __html: `
