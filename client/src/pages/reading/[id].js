@@ -7,7 +7,6 @@ import { AppButton, AppTypography } from "components/common";
 import { AppQuestion, CancelButton, ReadingContainer } from "components";
 import { ApiConstant, PathConstant } from "const";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
 import { ReadingService } from "services";
 
 const ReadingDetail = () => {
@@ -68,36 +67,3 @@ const ReadingDetail = () => {
 ReadingDetail.propTypes = {};
 
 export default memo(ReadingDetail);
-
-const MOCK_DATA = [
-  {
-    numberQuestion: 1,
-    message: "Chon di nao",
-    choose: [
-      { value: "1", label: "Friday" },
-      { value: "2", label: "Monday" },
-      { value: "3", label: "Saturday" },
-      { value: "4", label: "Wednesday" },
-    ],
-  },
-  {
-    numberQuestion: 2,
-    message: "Chon di thoi",
-    choose: [
-      { value: "1", label: "Friday" },
-      { value: "2", label: "Monday" },
-      { value: "3", label: "Saturday" },
-      { value: "4", label: "Wednesday" },
-    ],
-  },
-  {
-    numberQuestion: 3,
-    message: "Chon di roi",
-    choose: [
-      { value: "1", label: "Friday" },
-      { value: "2", label: "Monday" },
-      { value: "3", label: "Saturday" },
-      { value: "4", label: "Wednesday" },
-    ],
-  },
-];

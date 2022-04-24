@@ -1,7 +1,7 @@
-import React, { memo, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import AdminLayout from "layouts/AdminLayout";
-import { AppTypography } from "components/common";
+import { AppButton, AppTypography } from "components/common";
 import {
   IconButton,
   Stack,
@@ -10,6 +10,7 @@ import {
   TableCell,
   TableContainer,
   TableHead,
+  TablePagination,
   TableRow,
   TextField,
 } from "@mui/material";
@@ -17,15 +18,24 @@ import { makeStyles } from "@mui/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import { useTranslation } from "react-i18next";
 import AddButton from "./AddButton";
+import { useDispatch, useSelector } from "react-redux";
+import ReadingActions from "redux/reading.redux";
+import { formatDate } from "utils";
+import { FORMAT_DATE } from "const/app.const";
 
 const Listening = (props) => {
   const classes = useStyles();
   const [searched, setSearched] = useState("");
-  const [rows, setRows] = useState(MOCK_DATA);
+  const [rows, setRows] = useState([]);
   const { t: getLabel } = useTranslation();
+  const dispatch = useDispatch();
+
+  const readingsRedux = useSelector(
+    ({ readingRedux }) => readingRedux.readings
+  );
 
   const requestSearch = (searchedVal) => {
-    const filteredRows = MOCK_DATA.filter((row) => {
+    const filteredRows = readingsRedux.filter((row) => {
       return Object.keys(row).some((key) =>
         row[key].toLowerCase().includes(searchedVal)
       );
@@ -38,9 +48,13 @@ const Listening = (props) => {
     requestSearch(searched);
   };
 
+  useEffect(() => {
+    dispatch(ReadingActions.getReadingList());
+  }, [dispatch]);
+
   return (
     <AdminLayout>
-      <Stack flexGrow={1} spacing={2} sx={{ px: 4, pt: 5, pb: 4 }}>
+      <Stack flexGrow={1} spacing={2} sx={{ px: 4, pt: 5 }}>
         <AppTypography variant="h3">Quản lý Bài Đọc</AppTypography>
         <AddButton />
         <Stack direction="row" justifyContent="flex-end" spacing={1}>
@@ -54,32 +68,65 @@ const Listening = (props) => {
             <SearchIcon />
           </IconButton>
         </Stack>
-        <TableContainer>
-          <Table className={classes.table} aria-label="simple table">
+        <TableContainer sx={{ maxHeight: 450 }}>
+          <Table
+            className={classes.table}
+            stickyHeader
+            aria-label="simple table"
+          >
             <TableHead>
               <TableRow>
-                <TableCell>Food (100g serving)</TableCell>
-                <TableCell align="right">Calories</TableCell>
-                <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                <TableCell sx={{ width: "10%", fontWeight: 700 }}>
+                  Số thứ tự
+                </TableCell>
+                <TableCell sx={{ width: "30%", fontWeight: 700 }}>
+                  Tiêu đề
+                </TableCell>
+                <TableCell sx={{ width: "18%", fontWeight: 700 }}>
+                  Ngày tạo
+                </TableCell>
+                <TableCell sx={{ width: "18%", fontWeight: 700 }}>
+                  Ngày cập nhât mới nhất
+                </TableCell>
+                <TableCell sx={{ width: "auto", fontWeight: 700 }}></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              {readingsRedux?.map((row, index) => (
                 <TableRow key={row.name}>
                   <TableCell component="th" scope="row">
-                    {row.name}
+                    {index + 1}
                   </TableCell>
-                  <TableCell align="right">{row.calories}</TableCell>
-                  <TableCell align="right">{row.fat}</TableCell>
-                  <TableCell align="right">{row.carbs}</TableCell>
-                  <TableCell align="right">{row.protein}</TableCell>
+                  <TableCell>{row.title}</TableCell>
+                  <TableCell>
+                    {formatDate(row.createdAt, FORMAT_DATE)}
+                  </TableCell>
+                  <TableCell>
+                    {formatDate(row.updatedAt, FORMAT_DATE)}
+                  </TableCell>
+                  <TableCell align="right">
+                    <AppButton>Cập nhật</AppButton>
+                    <AppButton classes={{ contained: classes.deleteBtn }}>
+                      Xoá
+                    </AppButton>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
+        {Math.floor(readingsRedux.length / 10) > 0 && (
+          <TablePagination
+            rowsPerPageOptions={[10, 25, 100]}
+            component="div"
+            sx={{ overflow: "hidden" }}
+            count={Math.floor(readingsRedux.length / 10)}
+            rowsPerPage={10}
+            page={1}
+            onPageChange={() => {}}
+            onRowsPerPageChange={() => {}}
+          />
+        )}
       </Stack>
     </AdminLayout>
   );
@@ -130,37 +177,16 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.grey[400],
     border: `2px solid ${theme.palette.grey[100]}`,
   },
+  table: {},
+  deleteBtn: {
+    marginLeft: theme.spacing(2),
+    color: "#FFFFFF",
+    background: theme.palette.error.main,
+    boxShadow: `0 5px 0 ${theme.palette.error.dark}`,
+    "&:hover": {
+      background: theme.palette.error.main,
+      boxShadow: `0 5px 0 ${theme.palette.error.dark}`,
+      opacity: 0.9,
+    },
+  },
 }));
-
-const MOCK_DATA = [
-  { name: "Pizza", calories: "200", fat: "6.0", carbs: "24", protein: "4.0" },
-  {
-    name: "Hot Dog",
-    calories: "300",
-    fat: "6.0",
-    carbs: "24",
-    protein: "4.0",
-  },
-  {
-    name: "Burger",
-    calories: "400",
-    fat: "6.0",
-    carbs: "24",
-    protein: "4.0",
-  },
-  {
-    name: "Hamburger",
-    calories: "500",
-    fat: "6.0",
-    carbs: "24",
-    protein: "4.0",
-  },
-  { name: "Fries", calories: "600", fat: "6.0", carbs: "24", protein: "4.0" },
-  {
-    name: "Ice Cream",
-    calories: "700",
-    fat: "6.0",
-    carbs: "24",
-    protein: "4.0",
-  },
-];

@@ -6,3 +6,5 @@ export const DEFAULT_ANSWER = [
   { label: "C", value: "" },
   { label: "D", value: "" },
 ];
+
+export const FORMAT_DATE = "p dd/MM/y";

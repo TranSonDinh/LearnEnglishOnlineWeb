@@ -15,6 +15,8 @@ import {
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import SearchIcon from "@mui/icons-material/Search";
+import { formatDate } from "utils";
+import { FORMAT_DATE } from "const/app.const";
 
 const Listening = (props) => {
   const classes = useStyles();
@@ -38,7 +40,7 @@ const Listening = (props) => {
   return (
     <AdminLayout>
       <Stack flexGrow={1} spacing={2} sx={{ px: 4, pt: 5, pb: 4 }}>
-        <AppTypography variant="h3">Quản lý Đề Thi</AppTypography>
+        <AppTypography variant="h3">Quản lý Bài Nghe</AppTypography>
         <AppButton classes={{ contained: classes.contained }}>
           Thêm mới
         </AppButton>
@@ -53,32 +55,65 @@ const Listening = (props) => {
             <SearchIcon />
           </IconButton>
         </Stack>
-        <TableContainer>
-          <Table className={classes.table} aria-label="simple table">
+        <TableContainer sx={{ maxHeight: 450 }}>
+          <Table
+            className={classes.table}
+            stickyHeader
+            aria-label="simple table"
+          >
             <TableHead>
               <TableRow>
-                <TableCell>Food (100g serving)</TableCell>
-                <TableCell align="right">Calories</TableCell>
-                <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                <TableCell sx={{ width: "10%", fontWeight: 700 }}>
+                  Số thứ tự
+                </TableCell>
+                <TableCell sx={{ width: "30%", fontWeight: 700 }}>
+                  Tiêu đề
+                </TableCell>
+                <TableCell sx={{ width: "18%", fontWeight: 700 }}>
+                  Ngày tạo
+                </TableCell>
+                <TableCell sx={{ width: "18%", fontWeight: 700 }}>
+                  Ngày cập nhât mới nhất
+                </TableCell>
+                <TableCell sx={{ width: "auto", fontWeight: 700 }}></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              {rows?.map((row, index) => (
                 <TableRow key={row.name}>
                   <TableCell component="th" scope="row">
-                    {row.name}
+                    {index + 1}
                   </TableCell>
-                  <TableCell align="right">{row.calories}</TableCell>
-                  <TableCell align="right">{row.fat}</TableCell>
-                  <TableCell align="right">{row.carbs}</TableCell>
-                  <TableCell align="right">{row.protein}</TableCell>
+                  <TableCell>{row.title}</TableCell>
+                  <TableCell>
+                    {formatDate(row.createdAt, FORMAT_DATE)}
+                  </TableCell>
+                  <TableCell>
+                    {formatDate(row.updatedAt, FORMAT_DATE)}
+                  </TableCell>
+                  <TableCell align="right">
+                    <AppButton>Cập nhật</AppButton>
+                    <AppButton classes={{ contained: classes.deleteBtn }}>
+                      Xoá
+                    </AppButton>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
+        {Math.floor(rows.length / 10) > 0 && (
+          <TablePagination
+            rowsPerPageOptions={[10, 25, 100]}
+            component="div"
+            sx={{ overflow: "hidden" }}
+            count={Math.floor(rows.length / 10)}
+            rowsPerPage={10}
+            page={1}
+            onPageChange={() => {}}
+            onRowsPerPageChange={() => {}}
+          />
+        )}
       </Stack>
     </AdminLayout>
   );
@@ -128,6 +163,17 @@ const useStyles = makeStyles((theme) => ({
   buttonSearch: {
     color: theme.palette.grey[400],
     border: `2px solid ${theme.palette.grey[100]}`,
+  },
+  deleteBtn: {
+    marginLeft: theme.spacing(2),
+    color: "#FFFFFF",
+    background: theme.palette.error.main,
+    boxShadow: `0 5px 0 ${theme.palette.error.dark}`,
+    "&:hover": {
+      background: theme.palette.error.main,
+      boxShadow: `0 5px 0 ${theme.palette.error.dark}`,
+      opacity: 0.9,
+    },
   },
 }));
 

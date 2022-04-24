@@ -1,3 +1,5 @@
+import { NOT_HAVE_VALUE } from "const/app.const";
+import { format } from "date-fns";
 import { read, utils } from "xlsx";
 
 export const uuid = () => {
@@ -44,4 +46,18 @@ export const handleFile = (file, onChangeData) => {
   };
   if (rABS) reader.readAsBinaryString(file);
   else reader.readAsArrayBuffer(file);
+};
+
+export const formatDate = (
+  date,
+  formatString,
+  fallback = NOT_HAVE_VALUE,
+  options
+) => {
+  try {
+    if (!date || !formatString) return fallback;
+    return format(new Date(date), formatString, options);
+  } catch (error) {
+    return date;
+  }
 };

@@ -78,7 +78,7 @@ export default {
   },
   background: {
     default: "#FFFFFF",
-    paper: "#23085A",
+    paper: "#e0dede",
     dark: "#235390",
   },
   pink: {
