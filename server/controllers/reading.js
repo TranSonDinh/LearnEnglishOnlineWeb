@@ -10,12 +10,21 @@ export const getReadings = async (req, res) => {
 };
 
 export const createReading = async (req, res) => {
-  try {
-    const newReading = req.body;
-    const reading = new ReadingModel(newReading);
-    await reading.save();
+  const newReading = req.body;
+  ReadingModel.insertMany(newReading)
+    .then((docs) => {
+      res.status(200).json(docs);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err });
+    });
+};
 
-    res.status(200).json(newReading);
+export const findOneReading = async (req, res) => {
+  try {
+    const id = req.params?.id;
+    const reading = await ReadingModel.find({ _id: id });
+    res.status(200).json(reading);
   } catch (err) {
     res.status(500).json({ error: err });
   }

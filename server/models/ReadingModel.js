@@ -13,11 +13,18 @@ const schema = new mongoose.Schema(
     imageSrc: {
       type: String,
     },
-    question: { type: String, required: true },
-    answers: {
-      type: Array,
-      required: true,
-    },
+    question: [
+      {
+        title: {
+          type: String,
+          required: true,
+        },
+        answers: {
+          type: Array,
+          required: true,
+        },
+      },
+    ],
   },
   { timestamps: true }
 );
