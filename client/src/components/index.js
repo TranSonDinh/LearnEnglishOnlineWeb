@@ -19,6 +19,7 @@ import DeleteModal from "./DeleteModal";
 import SuccessModal from "./SuccessModal";
 import UpdateQuestion from "./UpdateQuestion";
 import ResultModal from "./ResultModal";
+import ErrorModal from "./ErrorModal";
 
 export {
   Trans,
@@ -42,4 +43,5 @@ export {
   SuccessModal,
   UpdateQuestion,
   ResultModal,
+  ErrorModal,
 };

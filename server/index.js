@@ -6,6 +6,7 @@ import reading from "./routers/reading.js";
 import listening from "./routers/listening.js";
 import testing from "./routers/testing.js";
 import vocabulary from "./routers/vocabulary.js";
+import home from "./routers/home.js";
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.use("/readings", reading);
 app.use("/listenings", listening);
 app.use("/testings", testing);
 app.use("/vocabulary", vocabulary);
+app.use("/", home);
 
 mongoose
   .connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })

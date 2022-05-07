@@ -44,10 +44,11 @@ export default {
   TXT_CREATE: "Tạo",
 
   //Placeholder
-  P_USERNAME_EMAIL: "Enter email or username",
-  P_PASSWORD: "Enter password",
-  P_USERNAME: "Enter username",
-  P_EMAIL: "Enter email",
+  P_USERNAME_EMAIL: "Nhập email hoặc password",
+  P_PASSWORD: "Nhập mật khẩu",
+  P_USERNAME: "Nhập tên đăng nhập",
+  P_EMAIL: "Nhập email",
+  P_CONFIRM_PASSWORD: "Nhập lại mật khẩu",
 
   P_TITLE: "Nhập tiêu đề",
   P_CONTENT: "Nhập nội dung",

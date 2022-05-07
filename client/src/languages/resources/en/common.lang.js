@@ -48,6 +48,7 @@ export default {
   P_PASSWORD: "Enter password",
   P_USERNAME: "Enter username",
   P_EMAIL: "Enter email",
+  P_CONFIRM_PASSWORD: "Enter confirm password",
 
   P_TITLE: "Nhập tiêu đề",
   P_CONTENT: "Nhập nội dung",
