@@ -23,6 +23,7 @@ import ReadingActions from "redux/reading.redux";
 import { formatDate } from "utils";
 import { FORMAT_DATE } from "const/app.const";
 import DeleteButton from "./DeleteButton";
+import UpdateButton from "./UpdateButton";
 
 const Listening = (props) => {
   const classes = useStyles();
@@ -106,7 +107,7 @@ const Listening = (props) => {
                     {formatDate(row.updatedAt, FORMAT_DATE)}
                   </TableCell>
                   <TableCell align="right">
-                    <AppButton>Cập nhật</AppButton>
+                    <UpdateButton data={row} />
                     <DeleteButton id={row?._id} />
                   </TableCell>
                 </TableRow>

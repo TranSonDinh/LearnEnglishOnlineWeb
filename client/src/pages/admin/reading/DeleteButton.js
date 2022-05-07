@@ -19,10 +19,15 @@ const DeleteButton = ({ id }) => {
 
   const onDelete = async () => {
     toggleIsOpen(false);
-    const res = await ReadingService.deleteReading({ id: id });
-    if (res.status === ApiConstant.STT_OK) {
-      setIsSuccess(true);
-    }
+    ReadingService.deleteReading({ id: id })
+      .then((res) => {
+        if (res.status === ApiConstant.STT_OK) {
+          setIsSuccess(true);
+        }
+      })
+      .catch((error) => {
+        window.isDebug && console.log(error);
+      });
   };
 
   const onCloseSuccessModal = () => {

@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
     background: theme.palette.grey.main,
     marginTop: theme.spacing(1),
     borderRadius: theme.spacing(2),
+    flex: 1,
     "& .MuiOutlinedInput-root": {
       "& fieldset": {
         border: `2px solid ${theme.palette.grey[100]}`,

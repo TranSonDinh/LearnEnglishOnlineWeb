@@ -15,10 +15,10 @@ const DeleteModal = ({ open, onClose, onClick, ...otherProps }) => {
         Bạn có chắc chắn muốn xoá không ?
       </AppTypography>
       <Stack direction="row" spacing={2} sx={{ justifyContent: "center" }}>
-        <AppButton onClick={onClose}>Huỷ</AppButton>
-        <AppButton onClick={onClick} classes={{ contained: classes.deleteBtn }}>
-          Xoá
+        <AppButton onClick={onClose} classes={{ contained: classes.deleteBtn }}>
+          Huỷ
         </AppButton>
+        <AppButton onClick={onClick}>Xoá</AppButton>
       </Stack>
     </AppDialog>
   );

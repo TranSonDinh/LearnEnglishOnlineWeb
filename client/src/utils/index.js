@@ -1,3 +1,4 @@
+import { AppConstant } from "const";
 import { NOT_HAVE_VALUE } from "const/app.const";
 import { format } from "date-fns";
 import { read, utils } from "xlsx";
@@ -60,4 +61,16 @@ export const formatDate = (
   } catch (error) {
     return date;
   }
+};
+
+export const getQuestion = (answers) => {
+  let arr = AppConstant.DEFAULT_ANSWER;
+  arr[0].value = Boolean(answers[0]?.content) ? 0 : "";
+  arr[1].value = Boolean(answers[1]?.content) ? 1 : "";
+  arr[2].value = Boolean(answers[2]?.content) ? 2 : "";
+  arr[3].value = Boolean(answers[3]?.content) ? 3 : "";
+  arr = arr.filter((item) => item.value !== "");
+  return arr.length > 0
+    ? arr
+    : [{ label: "Vui lòng điền đáp án bên trên", value: "" }];
 };

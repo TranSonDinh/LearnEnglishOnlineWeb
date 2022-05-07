@@ -39,3 +39,22 @@ export const deleteOnReading = async (req, res) => {
     res.status(500).json({ error: err });
   }
 };
+
+export const updateReading = async (req, res) => {
+  try {
+    const updateReading = req.body;
+    const newQuestion = updateReading?.question?.map((item) => ({
+      title: item.title,
+      answers: item.answers,
+    }));
+    const reading = await ReadingModel.findOneAndUpdate(
+      { _id: updateReading._id },
+      { ...updateReading, question: newQuestion },
+      { new: true }
+    );
+
+    res.status(200).json({});
+  } catch (err) {
+    res.status(500).json({ error: err });
+  }
+};

@@ -31,15 +31,19 @@ const AppQuestion = ({
           onChange(data?._id, e.target.value);
         }}
       >
-        {data?.answers?.map(({ content }, index) => (
-          <FormControlLabel
-            value={content}
-            key={index}
-            label={content}
-            control={<Radio />}
-            sx={{ width: "fit-content" }}
-          />
-        ))}
+        {data?.answers?.map(({ content }, index) => {
+          if (content) {
+            return (
+              <FormControlLabel
+                value={content}
+                key={index}
+                label={content}
+                control={<Radio />}
+                sx={{ width: "fit-content" }}
+              />
+            );
+          }
+        })}
       </RadioGroup>
     </Stack>
   );

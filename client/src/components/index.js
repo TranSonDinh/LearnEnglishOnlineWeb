@@ -17,6 +17,7 @@ import CoolDownTimer from "./CoolDownTimer";
 import NotFoundData from "./NotFoundData";
 import DeleteModal from "./DeleteModal";
 import SuccessModal from "./SuccessModal";
+import UpdateQuestion from "./UpdateQuestion";
 
 export {
   Trans,
@@ -38,4 +39,5 @@ export {
   NotFoundData,
   DeleteModal,
   SuccessModal,
+  UpdateQuestion,
 };

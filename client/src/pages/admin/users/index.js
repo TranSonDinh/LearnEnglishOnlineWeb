@@ -75,7 +75,6 @@ const Listening = (props) => {
                 <TableCell sx={{ width: "18%", fontWeight: 700 }}>
                   Ngày cập nhât mới nhất
                 </TableCell>
-                <TableCell sx={{ width: "auto", fontWeight: 700 }}></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -90,12 +89,6 @@ const Listening = (props) => {
                   </TableCell>
                   <TableCell>
                     {formatDate(row.updatedAt, FORMAT_DATE)}
-                  </TableCell>
-                  <TableCell align="right">
-                    <AppButton>Cập nhật</AppButton>
-                    <AppButton classes={{ contained: classes.deleteBtn }}>
-                      Xoá
-                    </AppButton>
                   </TableCell>
                 </TableRow>
               ))}
