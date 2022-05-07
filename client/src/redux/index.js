@@ -4,12 +4,14 @@ import rootSaga from "sagas";
 import * as ReadingActions from "./reading.redux";
 import * as ListeningActions from "./listening.redux";
 import * as VocabularyActions from "./vocabulary.redux";
+import * as HomeActions from "./home.redux";
 
 /* ------------- Assemble The Reducers ------------- */
 export const appReducer = combineReducers({
   readingRedux: ReadingActions.reducer,
   listeningRedux: ListeningActions.reducer,
   vocabularyRedux: VocabularyActions.reducer,
+  homeRedux: HomeActions.reducer,
 });
 
 export const rootReducer = (state, action) => {
