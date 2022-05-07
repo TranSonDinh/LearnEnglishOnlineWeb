@@ -17,7 +17,7 @@ const Slideshow = ({ slideImages }) => {
         }}
       >
         <svg
-          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiBox-root css-1om0hkc"
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiBox-root css-1om0hkc"
           focusable="false"
           aria-hidden="true"
           viewBox="0 0 24 24"
@@ -38,7 +38,7 @@ const Slideshow = ({ slideImages }) => {
         }}
       >
         <svg
-          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiBox-root css-1om0hkc"
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiBox-root css-1om0hkc"
           focusable="false"
           aria-hidden="true"
           viewBox="0 0 24 24"

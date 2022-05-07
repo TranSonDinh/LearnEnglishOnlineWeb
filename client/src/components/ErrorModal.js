@@ -4,12 +4,12 @@ import { AppButton, AppDialog, AppTypography } from "./common";
 import LabelWithIcon from "./LabelWithIcon";
 import { makeStyles } from "@mui/styles";
 
-const ErrorModal = ({ onClose, message, open }) => {
+const ErrorModal = ({ onClose, message, title, open }) => {
   const classes = useStyles();
 
   return (
     <AppDialog open={open} classes={{ paper: classes.paper }}>
-      <LabelWithIcon>Lỗi!</LabelWithIcon>
+      <LabelWithIcon>{title || "Lỗi!"}</LabelWithIcon>
       <AppTypography sx={{ my: 3, textAlign: "center" }}>
         {message || "Có lỗi vui lòng thử lại!"}
       </AppTypography>
@@ -22,6 +22,7 @@ ErrorModal.propTypes = {
   open: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
   message: PropTypes.string,
+  title: PropTypes.string,
 };
 
 export default ErrorModal;

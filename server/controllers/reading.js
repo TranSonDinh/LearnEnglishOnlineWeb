@@ -53,7 +53,7 @@ export const updateReading = async (req, res) => {
       { new: true }
     );
 
-    res.status(200).json({});
+    res.status(200).json(reading);
   } catch (err) {
     res.status(500).json({ error: err });
   }

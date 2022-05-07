@@ -21,7 +21,7 @@ const FinishLabelWithIcon = ({ isFinished, isSaved, ...otherProps }) => {
           />
         ) : typeof isFinished === "boolean" ? (
           <CheckCircleIcon sx={{ color: "success.main", fontSize: 28 }} />
-        ) : typeof isFinished === "string" ? (
+        ) : typeof isFinished === "number" ? (
           <AppTypography
             variant="caption"
             sx={{
@@ -34,7 +34,7 @@ const FinishLabelWithIcon = ({ isFinished, isSaved, ...otherProps }) => {
             fontWeight={700}
             color="warning.main"
           >
-            {isFinished}
+            {`${isFinished}%`}
           </AppTypography>
         ) : (
           <></>
@@ -46,7 +46,7 @@ const FinishLabelWithIcon = ({ isFinished, isSaved, ...otherProps }) => {
 };
 
 FinishLabelWithIcon.propTypes = {
-  isFinished: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  isFinished: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
   isSaved: PropTypes.bool,
 };
 

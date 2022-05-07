@@ -3,28 +3,39 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import HomeLayout from "layouts/HomeLayout";
 import { Stack } from "@mui/material";
-import { AppButton, AppTypography } from "components/common";
+import { AppButton, AppDialog, AppTypography } from "components/common";
 import {
   AppQuestion,
   CancelButton,
+  LabelWithIcon,
   ReadingContainer,
   ResultModal,
 } from "components";
 import { ApiConstant, PathConstant } from "const";
 import { useRouter } from "next/router";
-import { ReadingService } from "services";
+import { HomeService, ReadingService } from "services";
 import { READING_ROOT } from "const/path.const";
+import Cookie from "js-cookie";
+import { makeStyles } from "@mui/styles";
 
 const ReadingDetail = () => {
   const { t: getLabel } = useTranslation();
+  const classes = useStyles();
   const router = useRouter();
   const { id } = router.query;
   const [data, setData] = useState();
   const [choose, setChoose] = useState([]);
   const [isFinnish, setIsFinnish] = useState(false);
   const [correctTotal, setCorrectTotal] = useState(0);
+  const [error, setError] = useState(false);
 
-  const onBack = () => {};
+  const onBack = () => {
+    if (choose.length > 0) {
+      setError(true);
+    } else {
+      router.push(PathConstant.READING_ROOT);
+    }
+  };
 
   const onComplete = () => {
     const answersFinal = data?.question?.map(({ answers, _id }) => {
@@ -97,7 +108,7 @@ const ReadingDetail = () => {
           />
         ))}
         <Stack direction="row" alignItems="center" spacing={2}>
-          <CancelButton href={PathConstant.READING_ROOT} />
+          <CancelButton onClick={onBack} />
           <AppButton
             disabled={choose.length !== data?.question?.length}
             onClick={onComplete}
@@ -112,10 +123,37 @@ const ReadingDetail = () => {
         onClose={() => {
           setIsFinnish(false);
           router.push(READING_ROOT);
+          const hasAccount = Cookie.get("account");
+          if (hasAccount) {
+            const arr = hasAccount.split(" ");
+            HomeService.updateReading({
+              id: id,
+              percent: (100 * correctTotal) / choose?.length,
+              account: arr[0],
+            });
+          }
         }}
         total={choose?.length}
         correctTotal={correctTotal}
       />
+      <AppDialog open={error} classes={{ paper: classes.paper }}>
+        <LabelWithIcon>Bạn chưa hoàn thành!</LabelWithIcon>
+        <AppTypography sx={{ my: 3, textAlign: "center" }}>
+          Bạn sẽ bị mất kết quả đã chọn nếu bạn không hoàn thành bài kiểm tra!
+        </AppTypography>
+        <Stack direction="row" justifyContent="center" spacing={2}>
+          <CancelButton onClick={() => setError(false)} />
+          <AppButton
+            onClick={() => {
+              router.push(PathConstant.READING_ROOT);
+              setError(false);
+            }}
+            classes={{ contained: classes.contained }}
+          >
+            Thoát
+          </AppButton>
+        </Stack>
+      </AppDialog>
     </HomeLayout>
   );
 };
@@ -123,3 +161,12 @@ const ReadingDetail = () => {
 ReadingDetail.propTypes = {};
 
 export default memo(ReadingDetail);
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    width: 400,
+  },
+  contained: {
+    width: 132,
+  },
+}));

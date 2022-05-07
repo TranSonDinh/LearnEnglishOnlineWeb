@@ -23,3 +23,4 @@ export const GET_TESTING_LIST = "/testings";
 export const GET_VOCABULARY_LIST = "/vocabulary";
 export const SIGN_UP = "/sign-up";
 export const SIGN_IN = "/sign-in";
+export const UPDATE_READING = "/reading/update";

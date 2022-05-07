@@ -14,6 +14,58 @@ const schema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    reading: [
+      {
+        questionId: {
+          type: String,
+          required: true,
+        },
+        result: {
+          type: Number,
+          required: true,
+          default: 0,
+        },
+      },
+    ],
+    listening: [
+      {
+        questionId: {
+          type: String,
+          required: true,
+        },
+        result: {
+          type: Number,
+          required: true,
+          default: 0,
+        },
+      },
+    ],
+    vocabulary: [
+      {
+        questionId: {
+          type: String,
+          required: true,
+        },
+        result: {
+          type: Number,
+          required: true,
+          default: 0,
+        },
+      },
+    ],
+    testing: [
+      {
+        questionId: {
+          type: String,
+          required: true,
+        },
+        result: {
+          type: Number,
+          required: true,
+          default: 0,
+        },
+      },
+    ],
   },
   { timestamps: true }
 );

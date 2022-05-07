@@ -31,3 +31,34 @@ export const login = async (req, res) => {
     res.status(500).json({ error: err });
   }
 };
+
+export const updateReading = async (req, res) => {
+  try {
+    const { id, account, percent } = req.body;
+    const user = await UserClientModel.findOne({
+      username: account,
+    });
+    let reading = user?.reading || [];
+    const currentReading = reading.find(({ questionId }) => questionId === id);
+
+    if (currentReading) {
+      reading = reading.map((item) => {
+        if (item?.questionId === id && Number(item?.result) < Number(percent)) {
+          return { questionId: id, result: percent };
+        }
+        return item;
+      });
+    } else {
+      reading.push({ questionId: id, result: percent });
+    }
+
+    await UserClientModel.findOneAndUpdate(
+      { username: account },
+      { $set: { reading: reading } },
+      { new: true }
+    );
+    res.status(200).json("Success!");
+  } catch (error) {
+    res.status(500).json({ error: error });
+  }
+};

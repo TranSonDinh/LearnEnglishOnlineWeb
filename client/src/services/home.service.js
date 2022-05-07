@@ -8,3 +8,7 @@ export const signUp = (data) => {
 export const login = (data) => {
   return postApi(ApiConstant.SIGN_IN, data);
 };
+
+export const updateReading = (data) => {
+  return postApi(ApiConstant.UPDATE_READING, data);
+};

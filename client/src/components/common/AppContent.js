@@ -57,7 +57,7 @@ const AppContent = ({
 };
 
 AppContent.propTypes = {
-  isFinished: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  isFinished: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
   title: PropTypes.node,
   content: PropTypes.string,
   isSaved: PropTypes.bool,
