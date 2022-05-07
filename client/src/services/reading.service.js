@@ -1,4 +1,4 @@
-import { getApi, postApi } from "api";
+import { deleteApi, getApi, postApi } from "api";
 import { ApiConstant } from "const";
 
 export const getReadingList = () => {
@@ -11,4 +11,8 @@ export const createReading = (data) => {
 
 export const getReadingDetail = (id) => {
   return getApi(`${ApiConstant.GET_READING_LIST}/${id}`);
+};
+
+export const deleteReading = (data) => {
+  return deleteApi(ApiConstant.GET_READING_LIST, { data: data });
 };

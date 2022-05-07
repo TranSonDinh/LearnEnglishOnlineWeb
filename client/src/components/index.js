@@ -15,6 +15,8 @@ import CancelButton from "./CancelButton";
 import CircleNumberList from "./CircleNumberList";
 import CoolDownTimer from "./CoolDownTimer";
 import NotFoundData from "./NotFoundData";
+import DeleteModal from "./DeleteModal";
+import SuccessModal from "./SuccessModal";
 
 export {
   Trans,
@@ -34,4 +36,6 @@ export {
   CircleNumberList,
   CoolDownTimer,
   NotFoundData,
+  DeleteModal,
+  SuccessModal,
 };

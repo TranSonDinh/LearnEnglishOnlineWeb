@@ -29,3 +29,13 @@ export const findOneReading = async (req, res) => {
     res.status(500).json({ error: err });
   }
 };
+
+export const deleteOnReading = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const reading = await ReadingModel.deleteOne({ _id: id });
+    res.status(200).json(reading);
+  } catch (err) {
+    res.status(500).json({ error: err });
+  }
+};

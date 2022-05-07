@@ -4,3 +4,5 @@ import { ApiConstant } from "const";
 export const getApi = (url) => axios.get(ApiConstant.BASE_URL + url);
 export const postApi = (url, payload) =>
   axios.post(ApiConstant.BASE_URL + url, payload);
+export const deleteApi = (url, payload) =>
+  axios.delete(ApiConstant.BASE_URL + url, payload);

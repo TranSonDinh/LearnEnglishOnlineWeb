@@ -22,6 +22,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ReadingActions from "redux/reading.redux";
 import { formatDate } from "utils";
 import { FORMAT_DATE } from "const/app.const";
+import DeleteButton from "./DeleteButton";
 
 const Listening = (props) => {
   const classes = useStyles();
@@ -106,9 +107,7 @@ const Listening = (props) => {
                   </TableCell>
                   <TableCell align="right">
                     <AppButton>Cập nhật</AppButton>
-                    <AppButton classes={{ contained: classes.deleteBtn }}>
-                      Xoá
-                    </AppButton>
+                    <DeleteButton id={row?._id} />
                   </TableCell>
                 </TableRow>
               ))}
@@ -178,15 +177,4 @@ const useStyles = makeStyles((theme) => ({
     border: `2px solid ${theme.palette.grey[100]}`,
   },
   table: {},
-  deleteBtn: {
-    marginLeft: theme.spacing(2),
-    color: "#FFFFFF",
-    background: theme.palette.error.main,
-    boxShadow: `0 5px 0 ${theme.palette.error.dark}`,
-    "&:hover": {
-      background: theme.palette.error.main,
-      boxShadow: `0 5px 0 ${theme.palette.error.dark}`,
-      opacity: 0.9,
-    },
-  },
 }));
