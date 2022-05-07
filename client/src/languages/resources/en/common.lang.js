@@ -59,6 +59,12 @@ export default {
 
   //FORMAT
   FM_QUESTION_NUMBER: "<bold>Câu hỏi {{number}}:</bold> {{message}}",
+  FM_TOTAL_QUESTION:
+    "Số câu đã làm: <successColor><bold>{{number}}</bold></successColor>",
+  FM_CORRECT_QUESTION:
+    "Số câu làm đúng: <successColor><bold>{{number}}</bold></successColor>",
+  FM_PERCENT_RESULT:
+    "Phần trăm hoàn thành bài tập: <successColor><bold>{{number}}%</bold></successColor>",
 
   //Message
   MSG_TERM_SIGN_IN:

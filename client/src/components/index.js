@@ -18,6 +18,7 @@ import NotFoundData from "./NotFoundData";
 import DeleteModal from "./DeleteModal";
 import SuccessModal from "./SuccessModal";
 import UpdateQuestion from "./UpdateQuestion";
+import ResultModal from "./ResultModal";
 
 export {
   Trans,
@@ -40,4 +41,5 @@ export {
   DeleteModal,
   SuccessModal,
   UpdateQuestion,
+  ResultModal,
 };
