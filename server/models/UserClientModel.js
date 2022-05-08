@@ -40,19 +40,9 @@ const schema = new mongoose.Schema(
         },
       },
     ],
-    vocabulary: [
-      {
-        questionId: {
-          type: String,
-          required: true,
-        },
-        result: {
-          type: Number,
-          required: true,
-          default: 0,
-        },
-      },
-    ],
+    vocabulary: {
+      type: Array,
+    },
     testing: [
       {
         questionId: {

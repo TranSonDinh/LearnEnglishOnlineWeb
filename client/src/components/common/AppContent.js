@@ -11,6 +11,7 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { makeStyles } from "@mui/styles";
 
 const AppContent = ({
+  id,
   title,
   content,
   isFinished,
@@ -29,10 +30,12 @@ const AppContent = ({
   );
 
   useEffect(() => {
-    if (isPlay) {
-      audioRef.current.play();
-    } else {
-      audioRef.current.pause();
+    if (audioRef.current) {
+      if (isPlay) {
+        audioRef.current.play();
+      } else {
+        audioRef.current.pause();
+      }
     }
   }, [isPlay]);
 
@@ -51,14 +54,17 @@ const AppContent = ({
       </Stack>
       {example ? (
         <Stack direction="row" spacing={3}>
-          <IconButton className={classes.iconButton} onClick={onClick}>
+          <IconButton className={classes.iconButton}>
             <VolumeUpIcon
               className={classes.icon}
               onClick={() => togglePlay()}
             />
             <audio src={`/assets/listening/${audioSrc}`} ref={audioRef}></audio>
           </IconButton>
-          <IconButton className={classes.iconButton} onClick={onClick}>
+          <IconButton
+            className={classes.iconButton}
+            onClick={() => onClick(id)}
+          >
             {isSaved ? (
               <DeleteOutlineIcon className={classes.icon} />
             ) : (
@@ -76,6 +82,7 @@ const AppContent = ({
 };
 
 AppContent.propTypes = {
+  id: PropTypes.string,
   isFinished: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
   title: PropTypes.node,
   content: PropTypes.string,

@@ -16,3 +16,7 @@ export const updateReading = (data) => {
 export const updateListening = (data) => {
   return postApi(ApiConstant.UPDATE_LISTENING, data);
 };
+
+export const updateVocabulary = (data) => {
+  return postApi(ApiConstant.UPDATE_VOCABULARY, data);
+};

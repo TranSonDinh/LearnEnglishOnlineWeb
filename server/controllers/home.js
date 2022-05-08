@@ -95,3 +95,17 @@ export const updateListening = async (req, res) => {
     res.status(500).json({ error: error });
   }
 };
+
+export const updateVocabulary = async (req, res) => {
+  try {
+    const { newVocabulary, account } = req.body;
+    await UserClientModel.findOneAndUpdate(
+      { username: account },
+      { $set: { vocabulary: newVocabulary } },
+      { new: true }
+    );
+    res.status(200).json("Success!");
+  } catch (error) {
+    res.status(500).json({ error: error });
+  }
+};

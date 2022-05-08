@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import HomeLayout from "layouts/HomeLayout";
@@ -6,9 +6,43 @@ import { Stack } from "@mui/material";
 import { CommonTabs, CommonTitlePage } from "components/common";
 import { getVocabularyTabs } from ".";
 import { AppPagination, CardItem, NotFoundData } from "components";
+import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import VocabularyActions from "redux/vocabulary.redux";
 
 const MyVocabulary = () => {
   const { t: getLabel } = useTranslation();
+  const route = useRouter();
+  const dispatch = useDispatch();
+
+  const [list, setList] = useState([]);
+
+  const vocabularyRedux = useSelector(
+    ({ vocabularyRedux }) => vocabularyRedux.vocabulary
+  );
+
+  const vocabulary = useSelector(
+    ({ homeRedux }) => homeRedux.account?.vocabulary || []
+  );
+
+  useEffect(() => {
+    dispatch(VocabularyActions.getVocabularyList());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (vocabulary && vocabularyRedux) {
+      const newList = vocabularyRedux.map((item) => {
+        const result = vocabulary.find((id) => id === item?._id);
+        if (result) {
+          return {
+            ...item,
+            isSaved: true,
+          };
+        }
+      });
+      setList(newList.filter((item) => !!item));
+    }
+  }, [vocabulary, vocabularyRedux]);
 
   return (
     <HomeLayout>
@@ -16,8 +50,8 @@ const MyVocabulary = () => {
         <CommonTitlePage>{getLabel("TXT_LEARNING_VOCABULARY")}</CommonTitlePage>
         <CommonTabs tabs={getVocabularyTabs(getLabel)} />
         <Stack sx={{ width: "100%", alignItems: "center", mt: 5 }} spacing={3}>
-          {MOCK_DATA?.length > 0 ? (
-            MOCK_DATA.map((item) => <CardItem key={item?.id} data={item} />)
+          {list?.length > 0 ? (
+            list.map((item) => <CardItem key={item?.id} data={item} />)
           ) : (
             <NotFoundData content={getLabel("MSG_NOT_FOUND_DATA")} />
           )}
