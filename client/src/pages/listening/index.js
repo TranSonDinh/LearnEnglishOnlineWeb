@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from "react";
+import React, { memo, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import HomeLayout from "layouts/HomeLayout";
 import { Stack } from "@mui/material";
@@ -15,8 +15,14 @@ const Listening = () => {
   const route = useRouter();
   const dispatch = useDispatch();
 
+  const [data, setData] = useState([]);
+
   const listeningsRedux = useSelector(
     ({ listeningRedux }) => listeningRedux.listenings
+  );
+
+  const listening = useSelector(
+    ({ homeRedux }) => homeRedux.account?.listening || []
   );
 
   const onStart = (id) => {
@@ -29,19 +35,35 @@ const Listening = () => {
     dispatch(ListeningActions.getListeningList());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (listening && listeningsRedux) {
+      const newList = listeningsRedux.map((item) => {
+        const result = listening.find((i) => i?.questionId === item?._id);
+        if (result) {
+          return {
+            ...item,
+            isFinished: result?.result === 100 ? true : result?.result,
+          };
+        }
+        return item;
+      });
+      setData(newList.filter((item) => !!item));
+    }
+  }, [listening, listeningsRedux]);
+
   return (
     <HomeLayout>
       <Stack my={8.75} alignItems="center" position="relative">
         <CommonTitlePage>{getLabel("TXT_PRACTICE_LISTENING")}</CommonTitlePage>
         <CommonTabs tabs={getListeningTabs(getLabel)} />
         <Stack sx={{ width: "100%", alignItems: "center", mt: 5 }} spacing={3}>
-          {listeningsRedux?.length > 0 ? (
-            listeningsRedux.map((item) => (
+          {data?.length > 0 ? (
+            data.map((item) => (
               <CardItem
-                key={item?.id}
+                key={item?._id}
                 data={item}
                 onClick={() => {
-                  onStart(item?.id);
+                  onStart(item?._id);
                 }}
               />
             ))

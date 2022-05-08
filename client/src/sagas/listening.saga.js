@@ -7,7 +7,7 @@ export function* getListeningList() {
   try {
     let response = yield call(ListeningService.getListeningList);
     if (response.status === ApiConstant.STT_OK) {
-      yield put(ListeningActions.success({ readings: response.data }));
+      yield put(ListeningActions.success({ listenings: response.data }));
     } else {
       yield put(ListeningActions.failure(response));
     }

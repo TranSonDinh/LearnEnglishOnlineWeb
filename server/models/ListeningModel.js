@@ -6,17 +6,28 @@ const schema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    description: {
+    content: {
       type: String,
       required: true,
     },
     imageSrc: {
       type: String,
     },
-    answers: {
-      type: Array,
-      required: true,
+    listeningSrc: {
+      type: String,
     },
+    question: [
+      {
+        title: {
+          type: String,
+          required: true,
+        },
+        answers: {
+          type: Array,
+          required: true,
+        },
+      },
+    ],
   },
   { timestamps: true }
 );

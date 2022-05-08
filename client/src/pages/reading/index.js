@@ -7,7 +7,6 @@ import { useTranslation } from "react-i18next";
 import { PathConstant } from "const";
 import { AppPagination, CardItem, NotFoundData } from "components";
 import { useRouter } from "next/router";
-import StringFormat from "string-format";
 import { useDispatch, useSelector } from "react-redux";
 import ReadingActions from "redux/reading.redux";
 

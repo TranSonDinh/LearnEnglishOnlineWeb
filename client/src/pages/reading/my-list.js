@@ -62,7 +62,7 @@ const MyReading = () => {
                 key={item?._id}
                 data={item}
                 onClick={() => {
-                  onStart(item?.id);
+                  onStart(item?._id);
                 }}
               />
             ))

@@ -62,3 +62,36 @@ export const updateReading = async (req, res) => {
     res.status(500).json({ error: error });
   }
 };
+
+export const updateListening = async (req, res) => {
+  try {
+    const { id, account, percent } = req.body;
+    const user = await UserClientModel.findOne({
+      username: account,
+    });
+    let listening = user?.listening || [];
+    const currentListening = listening.find(
+      ({ questionId }) => questionId === id
+    );
+
+    if (currentListening) {
+      listening = listening.map((item) => {
+        if (item?.questionId === id && Number(item?.result) < Number(percent)) {
+          return { questionId: id, result: percent };
+        }
+        return item;
+      });
+    } else {
+      listening.push({ questionId: id, result: percent });
+    }
+
+    await UserClientModel.findOneAndUpdate(
+      { username: account },
+      { $set: { listening: listening } },
+      { new: true }
+    );
+    res.status(200).json("Success!");
+  } catch (error) {
+    res.status(500).json({ error: error });
+  }
+};

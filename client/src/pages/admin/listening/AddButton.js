@@ -6,13 +6,16 @@ import { useTranslation } from "react-i18next";
 import { makeStyles } from "@mui/styles";
 import { utils } from "xlsx";
 import { handleFile } from "utils";
-import { ReadingService } from "services";
+import { ListeningService } from "services";
 import { ApiConstant } from "const";
+import { useDispatch } from "react-redux";
+import ListeningActions from "redux/listening.redux";
 
 const AddButton = (props) => {
   const { t: getLabel } = useTranslation();
   const classes = useStyles();
   const [data, setData] = useState([]);
+  const dispatch = useDispatch();
 
   const [open, toggleOpen] = useReducer(
     (currentStatus, nextStatus) => nextStatus ?? !currentStatus,
@@ -29,27 +32,28 @@ const AddButton = (props) => {
       let formatData = data.map((item) => {
         return {
           imageSrc: item[1],
-          title: item[2],
-          content: item[3],
+          listeningFile: item[2],
+          title: item[3],
+          content: item[4],
           question: [
             {
-              title: item[4],
+              title: item[5],
               answers: [
                 {
-                  content: item[5],
-                  isTrue: item[9] === "A",
-                },
-                {
                   content: item[6],
-                  isTrue: item[9] === "B",
+                  isTrue: item[10] === "A",
                 },
                 {
                   content: item[7],
-                  isTrue: item[9] === "C",
+                  isTrue: item[10] === "B",
                 },
                 {
                   content: item[8],
-                  isTrue: item[9] === "D",
+                  isTrue: item[10] === "C",
+                },
+                {
+                  content: item[9],
+                  isTrue: item[10] === "D",
                 },
               ],
             },
@@ -75,9 +79,10 @@ const AddButton = (props) => {
     try {
       const newData = handleData(data);
 
-      ReadingService.createReading(newData).then((res) => {
+      ListeningService.createListening(newData).then((res) => {
         if (res.status === ApiConstant.STT_OK) {
           toggleOpen(false);
+          dispatch(ListeningActions.getListeningList());
         }
       });
     } catch (error) {

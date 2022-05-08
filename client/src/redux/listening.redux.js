@@ -3,6 +3,7 @@ import { createReducer, createActions } from "reduxsauce";
 /* ------------- Types and Action Creators ------------- */
 const { Types, Creators } = createActions({
   getListeningList: ["data"],
+  updateListening: ["data"],
   success: ["data"],
   failure: ["data"],
   reset: [],
@@ -43,12 +44,21 @@ export const failure = (state, action) => {
   };
 };
 
+export const updateListening = (state, action) => {
+  const data = action.data || [];
+  return {
+    ...state,
+    listenings: data,
+  };
+};
+
 /* ------------- Mapping ------------- */
 export const HANDLERS = {
   [Types.GET_LISTENING_LIST]: request,
   [Types.RESET]: reset,
   [Types.SUCCESS]: success,
   [Types.FAILURE]: failure,
+  [Types.UPDATE_LISTENING]: updateListening,
 };
 
 /* ------------- Hookup Reducers To Types ------------- */

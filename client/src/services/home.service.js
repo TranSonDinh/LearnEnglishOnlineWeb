@@ -12,3 +12,7 @@ export const login = (data) => {
 export const updateReading = (data) => {
   return postApi(ApiConstant.UPDATE_READING, data);
 };
+
+export const updateListening = (data) => {
+  return postApi(ApiConstant.UPDATE_LISTENING, data);
+};

@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { getListeningTabs } from ".";
 import { useTranslation } from "react-i18next";
@@ -8,10 +8,22 @@ import HomeLayout from "layouts/HomeLayout";
 import { AppPagination, CardItem, NotFoundData } from "components";
 import { useRouter } from "next/router";
 import { PathConstant } from "const";
+import { useDispatch, useSelector } from "react-redux";
+import ListeningActions from "redux/listening.redux";
 
 const MyListening = () => {
   const { t: getLabel } = useTranslation();
   const route = useRouter();
+  const dispatch = useDispatch();
+
+  const [list, setList] = useState([]);
+
+  const listening = useSelector(
+    ({ homeRedux }) => homeRedux.account?.listening || []
+  );
+  const listeningsRedux = useSelector(
+    ({ listeningRedux }) => listeningRedux.listenings
+  );
 
   const onStart = (id) => {
     if (id) {
@@ -19,19 +31,38 @@ const MyListening = () => {
     }
   };
 
+  useEffect(() => {
+    dispatch(ListeningActions.getListeningList());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (listening && listeningsRedux) {
+      const newList = listeningsRedux.map((item) => {
+        const result = listening.find((i) => i?.questionId === item?._id);
+        if (result) {
+          return {
+            ...item,
+            isFinished: result?.result === 100 ? true : result?.result,
+          };
+        }
+      });
+      setList(newList.filter((item) => !!item));
+    }
+  }, [listening, listeningsRedux]);
+
   return (
     <HomeLayout>
       <Stack my={8.75} alignItems="center" position="relative">
         <CommonTitlePage>{getLabel("TXT_PRACTICE_LISTENING")}</CommonTitlePage>
         <CommonTabs tabs={getListeningTabs(getLabel)} />
         <Stack sx={{ width: "100%", alignItems: "center", mt: 5 }} spacing={3}>
-          {MOCK_DATA?.length > 0 ? (
-            MOCK_DATA.map((item) => (
+          {list?.length > 0 ? (
+            list.map((item) => (
               <CardItem
                 key={item?.id}
                 data={item}
                 onClick={() => {
-                  onStart(item?.id);
+                  onStart(item?._id);
                 }}
               />
             ))
@@ -39,7 +70,7 @@ const MyListening = () => {
             <NotFoundData content={getLabel("MSG_NOT_FOUND_DATA")} />
           )}
         </Stack>
-        {MOCK_DATA?.length > 0 && <AppPagination />}
+        {list?.length > 0 && <AppPagination />}
       </Stack>
     </HomeLayout>
   );

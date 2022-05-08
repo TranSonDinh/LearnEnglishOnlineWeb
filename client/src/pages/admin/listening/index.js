@@ -1,7 +1,7 @@
-import React, { memo, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import AdminLayout from "layouts/AdminLayout";
-import { AppButton, AppSelect, AppTypography } from "components/common";
+import { AppTypography } from "components/common";
 import {
   IconButton,
   Stack,
@@ -10,6 +10,7 @@ import {
   TableCell,
   TableContainer,
   TableHead,
+  TablePagination,
   TableRow,
   TextField,
 } from "@mui/material";
@@ -17,11 +18,22 @@ import { makeStyles } from "@mui/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import { formatDate } from "utils";
 import { FORMAT_DATE } from "const/app.const";
+import AddButton from "./AddButton";
+import DeleteButton from "./DeleteButton";
+import UpdateButton from "./UpdateButton";
+import { useDispatch, useSelector } from "react-redux";
+import ListeningActions from "redux/listening.redux";
 
 const Listening = (props) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
   const [searched, setSearched] = useState("");
   const [rows, setRows] = useState(MOCK_DATA);
+
+  const listeningsRedux = useSelector(
+    ({ listeningRedux }) => listeningRedux.listenings
+  );
 
   const requestSearch = (searchedVal) => {
     const filteredRows = MOCK_DATA.filter((row) => {
@@ -37,13 +49,21 @@ const Listening = (props) => {
     requestSearch(searched);
   };
 
+  useEffect(() => {
+    dispatch(ListeningActions.getListeningList());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (listeningsRedux) {
+      setRows(listeningsRedux);
+    }
+  }, [listeningsRedux]);
+
   return (
     <AdminLayout>
       <Stack flexGrow={1} spacing={2} sx={{ px: 4, pt: 5, pb: 4 }}>
         <AppTypography variant="h3">Quản lý Bài Nghe</AppTypography>
-        <AppButton classes={{ contained: classes.contained }}>
-          Thêm mới
-        </AppButton>
+        <AddButton />
         <Stack direction="row" justifyContent="flex-end" spacing={1}>
           <TextField
             className={classes.search}
@@ -92,10 +112,8 @@ const Listening = (props) => {
                     {formatDate(row.updatedAt, FORMAT_DATE)}
                   </TableCell>
                   <TableCell align="right">
-                    <AppButton>Cập nhật</AppButton>
-                    <AppButton classes={{ contained: classes.deleteBtn }}>
-                      Xoá
-                    </AppButton>
+                    <UpdateButton data={row} />
+                    <DeleteButton id={row?._id} />
                   </TableCell>
                 </TableRow>
               ))}

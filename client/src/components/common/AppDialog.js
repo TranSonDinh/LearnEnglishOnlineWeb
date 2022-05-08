@@ -85,6 +85,7 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     right: theme.spacing(2.5),
     top: theme.spacing(2.5),
+    color: "#000",
   },
   icon: {
     width: 18,
