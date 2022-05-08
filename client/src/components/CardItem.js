@@ -8,10 +8,11 @@ const CardItem = ({ data, onClick, ...otherProps }) => {
       <AppContent
         id={data?._id}
         title={data?.title}
-        content={data?.content}
+        content={data?.content || data?.spelling}
         isFinished={data?.isFinished}
         isSaved={data?.isSaved}
         example={data?.example}
+        audioSrc={data?.audioSrc}
         onClick={onClick}
       />
     </AppCard>
@@ -27,6 +28,7 @@ CardItem.propTypes = {
     content: PropTypes.string,
     isSaved: PropTypes.bool,
     example: PropTypes.string,
+    audioSrc: PropTypes.string,
   }),
   onClick: PropTypes.func,
 };

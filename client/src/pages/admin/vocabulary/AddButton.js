@@ -1,87 +1,66 @@
-import React, { memo, useEffect, useMemo, useReducer, useState } from "react";
+import React, { memo, useCallback, useReducer, useState } from "react";
 import PropTypes from "prop-types";
-import {
-  AppButton,
-  AppDialog,
-  AppInputWithLabel,
-  AppSelect,
-  AppTypography,
-} from "components/common";
-import { makeStyles } from "@mui/styles";
+import { Input } from "@mui/material";
+import { AppButton, AppDialog } from "components/common";
 import { useTranslation } from "react-i18next";
-import { Stack } from "@mui/material";
-import { ApiConstant, AppConstant } from "const";
-import { ReadingService } from "services";
-import XLSX from "xlsx";
+import { makeStyles } from "@mui/styles";
+import { utils } from "xlsx";
+import { handleFile } from "utils";
+import { VocabularyService } from "services";
+import { ApiConstant } from "const";
 
-const AddButton = () => {
-  const classes = useStyles();
+const AddButton = (props) => {
   const { t: getLabel } = useTranslation();
-
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [question, setQuestion] = useState("");
-  const [answerA, setAnswerA] = useState("");
-  const [answerB, setAnswerB] = useState("");
-  const [answerC, setAnswerC] = useState("");
-  const [answerD, setAnswerD] = useState("");
-
-  const options = useMemo(() => {
-    let arr = AppConstant.DEFAULT_ANSWER;
-    arr[0].value = Boolean(answerA) ? 0 : "";
-    arr[1].value = Boolean(answerB) ? 1 : "";
-    arr[2].value = Boolean(answerC) ? 2 : "";
-    arr[3].value = Boolean(answerD) ? 3 : "";
-    arr = arr.filter((item) => item.value !== "");
-    return arr.length > 0
-      ? arr
-      : [{ label: "Vui lòng điền đáp án bên trên", value: "" }];
-  }, [answerA, answerB, answerC, answerD]);
-
-  const [trueAnswer, setTrueAnswer] = useState(options[0]?.value);
+  const classes = useStyles();
+  const [data, setData] = useState([]);
 
   const [open, toggleOpen] = useReducer(
     (currentStatus, nextStatus) => nextStatus ?? !currentStatus,
     false
   );
 
+  const onChangeFile = (e) => {
+    const files = e.target.files;
+    if (files && files[0]) handleFile(files[0], setData);
+  };
+
+  const handleData = useCallback(
+    (data) => {
+      let formatData = data.map((item) => {
+        return {
+          imageSrc: item[1],
+          audioSrc: item[2],
+          title: item[3],
+          spelling: item[4],
+          example: item[5],
+        };
+      });
+      let currentIndex;
+      formatData.forEach((item, index) => {
+        if (item?.title) {
+          currentIndex = index;
+        } else {
+          formatData[currentIndex].question.push(...item.question);
+        }
+      });
+      const finalData = formatData.filter(({ title }) => Boolean(title));
+      return finalData;
+    },
+    [data]
+  );
+
   const onCreate = () => {
     try {
-      const newArr = [answerA, answerB, answerC, answerD];
-      const newAnswers = options.map(({ value }) => ({
-        content: newArr[value],
-        isTrue: value === trueAnswer,
-      }));
-
-      ReadingService.createReading({
-        title: title,
-        content: content,
-        question: question,
-        answers: newAnswers,
-      }).then((res) => {
+      const newData = handleData(data);
+      VocabularyService.createVocabulary(newData).then((res) => {
         if (res.status === ApiConstant.STT_OK) {
           toggleOpen(false);
-          reset();
         }
       });
     } catch (error) {
       window.isDebug && console.log(error);
     }
   };
-
-  const reset = () => {
-    setTitle("");
-    setContent("");
-    setQuestion("");
-    setAnswerA("");
-    setAnswerB("");
-    setAnswerC("");
-    setAnswerD("");
-  };
-
-  useEffect(() => {
-    setTrueAnswer(options[0]?.value);
-  }, [options]);
 
   return (
     <>
@@ -98,87 +77,14 @@ const AddButton = () => {
         closeIcon
         classes={{ paper: classes.paper }}
       >
-        <AppInputWithLabel
-          label={getLabel("TXT_TITLE")}
+        <Input
           inputProps={{
-            className: classes.input,
-            placeholder: getLabel("P_TITLE"),
-            onChange: (e) => setTitle(e.target.value),
+            accept: ".xlsx",
           }}
-          labelProps={{ className: classes.label }}
+          id="contained-button-file"
+          type="file"
+          onChange={onChangeFile}
         />
-        <AppInputWithLabel
-          label={getLabel("TXT_CONTENT")}
-          labelProps={{ className: classes.label }}
-          inputProps={{
-            multiline: true,
-            rows: 4,
-            placeholder: getLabel("P_CONTENT"),
-            onChange: (e) => setContent(e.target.value),
-          }}
-          sx={{ mt: 2 }}
-        />
-        <AppInputWithLabel
-          label={getLabel("TXT_QUESTION")}
-          labelProps={{ className: classes.label }}
-          inputProps={{
-            placeholder: getLabel("P_QUESTION"),
-            onChange: (e) => setQuestion(e.target.value),
-          }}
-          sx={{ mt: 2 }}
-        />
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="space-between"
-          sx={{ mt: 2 }}
-        >
-          <AppInputWithLabel
-            label={getLabel("TXT_A")}
-            inputProps={{
-              placeholder: getLabel("P_A"),
-              onChange: (e) => setAnswerA(e.target.value),
-            }}
-          />
-          <AppInputWithLabel
-            label={getLabel("TXT_B")}
-            inputProps={{
-              placeholder: getLabel("P_B"),
-              onChange: (e) => setAnswerB(e.target.value),
-            }}
-          />
-        </Stack>
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="space-between"
-          sx={{ mt: 2 }}
-        >
-          <AppInputWithLabel
-            inputProps={{
-              placeholder: getLabel("P_C"),
-              onChange: (e) => setAnswerC(e.target.value),
-            }}
-            label={getLabel("TXT_C")}
-          />
-          <AppInputWithLabel
-            label={getLabel("TXT_D")}
-            inputProps={{
-              placeholder: getLabel("P_D"),
-              onChange: (e) => setAnswerD(e.target.value),
-            }}
-          />
-        </Stack>
-        <Stack direction="row" alignItems="center" spacing={2} mt={2}>
-          <AppTypography variant="subtitle2">
-            {getLabel("TXT_TRUE_ANSWER")}
-          </AppTypography>
-          <AppSelect
-            options={options}
-            value={trueAnswer}
-            onChange={(e) => setTrueAnswer(e.target.value)}
-          />
-        </Stack>
         <AppButton classes={{ root: classes.btn }} onClick={onCreate}>
           {getLabel("TXT_CREATE")}
         </AppButton>
@@ -190,6 +96,13 @@ const AddButton = () => {
 AddButton.propTypes = {};
 
 export default memo(AddButton);
+
+const make_cols = (refstr) => {
+  let o = [],
+    C = utils.decode_range(refstr).e.c + 1;
+  for (var i = 0; i < C; ++i) o[i] = { name: utils.encode_col(i), key: i };
+  return o;
+};
 
 const useStyles = makeStyles((theme) => ({
   contained: {
@@ -211,5 +124,7 @@ const useStyles = makeStyles((theme) => ({
   },
   btn: {
     marginTop: theme.spacing(3),
+    width: 100,
+    alignSelf: "center",
   },
 }));

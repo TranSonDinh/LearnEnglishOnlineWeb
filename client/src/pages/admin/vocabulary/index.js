@@ -1,7 +1,7 @@
-import React, { memo, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import AdminLayout from "layouts/AdminLayout";
-import { AppButton, AppSelect, AppTypography } from "components/common";
+import { AppTypography } from "components/common";
 import {
   IconButton,
   Stack,
@@ -17,14 +17,24 @@ import { makeStyles } from "@mui/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import { formatDate } from "utils";
 import { FORMAT_DATE } from "const/app.const";
+import UpdateButton from "./UpdateButton";
+import DeleteButton from "./DeleteButton";
+import AddButton from "./AddButton";
+import VocabularyActions from "redux/vocabulary.redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Listening = (props) => {
   const classes = useStyles();
   const [searched, setSearched] = useState("");
-  const [rows, setRows] = useState(MOCK_DATA);
+  const [rows, setRows] = useState([]);
+  const dispatch = useDispatch();
+
+  const vocabularyRedux = useSelector(
+    ({ vocabularyRedux }) => vocabularyRedux.vocabulary
+  );
 
   const requestSearch = (searchedVal) => {
-    const filteredRows = MOCK_DATA.filter((row) => {
+    const filteredRows = vocabularyRedux.filter((row) => {
       return Object.keys(row).some((key) =>
         row[key].toLowerCase().includes(searchedVal)
       );
@@ -37,13 +47,15 @@ const Listening = (props) => {
     requestSearch(searched);
   };
 
+  useEffect(() => {
+    dispatch(VocabularyActions.getVocabularyList());
+  }, [dispatch]);
+
   return (
     <AdminLayout>
       <Stack flexGrow={1} spacing={2} sx={{ px: 4, pt: 5, pb: 4 }}>
         <AppTypography variant="h3">Quản lý Từ Vựng</AppTypography>
-        <AppButton classes={{ contained: classes.contained }}>
-          Thêm mới
-        </AppButton>
+        <AddButton />
         <Stack direction="row" justifyContent="flex-end" spacing={1}>
           <TextField
             className={classes.search}
@@ -79,35 +91,33 @@ const Listening = (props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows?.map((row, index) => (
-                <TableRow key={row.name}>
+              {vocabularyRedux?.map((row, index) => (
+                <TableRow key={index}>
                   <TableCell component="th" scope="row">
                     {index + 1}
                   </TableCell>
-                  <TableCell>{row.title}</TableCell>
+                  <TableCell>{row?.title}</TableCell>
                   <TableCell>
-                    {formatDate(row.createdAt, FORMAT_DATE)}
+                    {formatDate(row?.createdAt, FORMAT_DATE)}
                   </TableCell>
                   <TableCell>
-                    {formatDate(row.updatedAt, FORMAT_DATE)}
+                    {formatDate(row?.updatedAt, FORMAT_DATE)}
                   </TableCell>
                   <TableCell align="right">
-                    <AppButton>Cập nhật</AppButton>
-                    <AppButton classes={{ contained: classes.deleteBtn }}>
-                      Xoá
-                    </AppButton>
+                    <UpdateButton data={row} />
+                    <DeleteButton id={row?._id} />
                   </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
-        {Math.floor(rows.length / 10) > 0 && (
+        {Math.floor(vocabularyRedux.length / 10) > 0 && (
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
             sx={{ overflow: "hidden" }}
-            count={Math.floor(rows.length / 10)}
+            count={Math.floor(vocabularyRedux.length / 10)}
             rowsPerPage={10}
             page={1}
             onPageChange={() => {}}

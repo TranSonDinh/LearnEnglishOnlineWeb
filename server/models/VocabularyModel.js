@@ -6,7 +6,7 @@ const schema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    description: {
+    spelling: {
       type: String,
       required: true,
     },
@@ -16,9 +16,8 @@ const schema = new mongoose.Schema(
     imageSrc: {
       type: String,
     },
-    answers: {
-      type: Array,
-      required: true,
+    audioSrc: {
+      type: String,
     },
   },
   { timestamps: true }

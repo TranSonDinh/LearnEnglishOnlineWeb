@@ -186,11 +186,14 @@ const UpdateButton = ({ data }) => {
               toggleOpen(false);
               dispatch(ListeningActions.getListeningList());
             }}
+            sx={{ width: 150 }}
             classes={{ contained: classes.deleteBtn }}
           >
             Huỷ
           </AppButton>
-          <AppButton onClick={onUpdate}>Lưu</AppButton>
+          <AppButton onClick={onUpdate} sx={{ width: 150 }}>
+            Lưu
+          </AppButton>
         </Stack>
       </AppDialog>
       <SuccessModal

@@ -29,7 +29,7 @@ const Vocabulary = () => {
         <Stack sx={{ width: "100%", alignItems: "center", mt: 5 }} spacing={3}>
           {vocabularyRedux?.length > 0 ? (
             vocabularyRedux.map((item) => (
-              <CardItem key={item?.id} data={item} />
+              <CardItem key={item?._id} data={item} />
             ))
           ) : (
             <NotFoundData content={getLabel("MSG_NOT_FOUND_DATA")} />

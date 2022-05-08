@@ -3,6 +3,7 @@ import { createReducer, createActions } from "reduxsauce";
 /* ------------- Types and Action Creators ------------- */
 const { Types, Creators } = createActions({
   getVocabularyList: ["data"],
+  updateVocabulary: ["data"],
   success: ["data"],
   failure: ["data"],
   reset: [],
@@ -43,12 +44,21 @@ export const failure = (state, action) => {
   };
 };
 
+export const updateVocabulary = (state, action) => {
+  const data = action.data || [];
+  return {
+    ...state,
+    vocabulary: data,
+  };
+};
+
 /* ------------- Mapping ------------- */
 export const HANDLERS = {
   [Types.GET_VOCABULARY_LIST]: request,
   [Types.RESET]: reset,
   [Types.SUCCESS]: success,
   [Types.FAILURE]: failure,
+  [Types.UPDATE_VOCABULARY]: updateVocabulary,
 };
 
 /* ------------- Hookup Reducers To Types ------------- */

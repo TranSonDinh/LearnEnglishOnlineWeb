@@ -7,7 +7,7 @@ export function* getVocabularyList() {
   try {
     let response = yield call(VocabularyService.getVocabularyList);
     if (response.status === ApiConstant.STT_OK) {
-      yield put(VocabularyActions.success({ readings: response.data }));
+      yield put(VocabularyActions.success({ vocabulary: response.data }));
     } else {
       yield put(VocabularyActions.failure(response));
     }

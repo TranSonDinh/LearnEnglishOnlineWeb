@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useReducer, useRef } from "react";
 import FinishLabelWithIcon from "components/FinishLabelWithIcon";
 import AppButton from "./AppButton";
 import { useTranslation } from "react-i18next";
@@ -17,9 +17,24 @@ const AppContent = ({
   isSaved,
   example,
   onClick,
+  audioSrc,
 }) => {
   const { t: getLabel } = useTranslation();
   const classes = useStyles();
+  const audioRef = useRef();
+
+  const [isPlay, togglePlay] = useReducer(
+    (currentState, nextState) => nextState ?? !currentState,
+    false
+  );
+
+  useEffect(() => {
+    if (isPlay) {
+      audioRef.current.play();
+    } else {
+      audioRef.current.pause();
+    }
+  }, [isPlay]);
 
   return (
     <>
@@ -37,7 +52,11 @@ const AppContent = ({
       {example ? (
         <Stack direction="row" spacing={3}>
           <IconButton className={classes.iconButton} onClick={onClick}>
-            <VolumeUpIcon className={classes.icon} />
+            <VolumeUpIcon
+              className={classes.icon}
+              onClick={() => togglePlay()}
+            />
+            <audio src={`/assets/listening/${audioSrc}`} ref={audioRef}></audio>
           </IconButton>
           <IconButton className={classes.iconButton} onClick={onClick}>
             {isSaved ? (
@@ -62,6 +81,7 @@ AppContent.propTypes = {
   content: PropTypes.string,
   isSaved: PropTypes.bool,
   onClick: PropTypes.func,
+  audioSrc: PropTypes.string,
 };
 AppContent.defaultProps = {};
 

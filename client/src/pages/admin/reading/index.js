@@ -95,7 +95,7 @@ const Listening = (props) => {
             </TableHead>
             <TableBody>
               {readingsRedux?.map((row, index) => (
-                <TableRow key={row.name}>
+                <TableRow key={index}>
                   <TableCell component="th" scope="row">
                     {index + 1}
                   </TableCell>

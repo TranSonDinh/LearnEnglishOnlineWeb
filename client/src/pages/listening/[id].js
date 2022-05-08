@@ -98,7 +98,7 @@ const ListeningDetail = () => {
         <AppTypography variant="subtitle1" mt={3}>
           {getLabel("TXT_LISTENING_QUESTION_TITLE")}
         </AppTypography>
-        <ReactAudioPlayer src="../listeningDemo.mp3" controls />
+        <audio src={`/assets/listening/${data?.listeningSrc}`} controls></audio>
         {data?.question?.map((item, index) => (
           <AppQuestion
             data={item}
