@@ -5,6 +5,7 @@ import * as ReadingActions from "./reading.redux";
 import * as ListeningActions from "./listening.redux";
 import * as VocabularyActions from "./vocabulary.redux";
 import * as HomeActions from "./home.redux";
+import * as TestingActions from "./testing.redux";
 
 /* ------------- Assemble The Reducers ------------- */
 export const appReducer = combineReducers({
@@ -12,6 +13,7 @@ export const appReducer = combineReducers({
   listeningRedux: ListeningActions.reducer,
   vocabularyRedux: VocabularyActions.reducer,
   homeRedux: HomeActions.reducer,
+  testingRedux: TestingActions.reducer,
 });
 
 export const rootReducer = (state, action) => {

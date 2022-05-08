@@ -13,14 +13,52 @@ const schema = new mongoose.Schema(
     imageSrc: {
       type: String,
     },
-    readingQuestions: {
-      type: Array,
-      required: true,
-    },
-    listeningQuestions: {
-      type: Array,
-      required: true,
-    },
+    readingQuestions: [
+      {
+        threads: {
+          type: String,
+        },
+        questions: [
+          {
+            title: {
+              type: String,
+              required: true,
+            },
+            content: {
+              type: String,
+              required: true,
+            },
+            answers: {
+              type: Array,
+              required: true,
+            },
+          },
+        ],
+      },
+    ],
+    listeningQuestions: [
+      {
+        audioSrc: {
+          type: String,
+        },
+        questions: [
+          {
+            title: {
+              type: String,
+              required: true,
+            },
+            content: {
+              type: String,
+              required: true,
+            },
+            answers: {
+              type: Array,
+              required: true,
+            },
+          },
+        ],
+      },
+    ],
   },
   { timestamps: true }
 );
